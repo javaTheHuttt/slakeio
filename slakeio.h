@@ -60,4 +60,9 @@ struct slake *my_slake;
 
 void draw(void);
 
+// width of the terminal
+int tbw;
+
+// height of the terminal
+int tbh;
 
