@@ -51,6 +51,9 @@ double start_clock;
 
 double slake_clock(void);
 
+
+// pointer to the slake the user is controlling
+struct slake *my_slake;
 //
 // TUI DECLARATIONS
 //
