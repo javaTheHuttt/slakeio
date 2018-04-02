@@ -11,7 +11,10 @@ struct slake {
 	enum slake_mode mode;
 	// score or length of slake
 	int length;
-	
+	//lastmove_time
+	double lastmove_clock;
+	//speed (in Zeichen pro Sekunde)
+	double speed; 
 	//functions
 
 	// creates slake with given parameters
@@ -24,8 +27,8 @@ struct slake {
 
 
 struct slake_position {
-	int x;
-	int y;
+	double x;
+	double y;
 };
 
 
@@ -60,9 +63,4 @@ struct slake *my_slake;
 
 void draw(void);
 
-// width of the terminal
-int tbw;
-
-// height of the terminal
-int tbh;
 
