@@ -5,7 +5,7 @@
 #include "slakeio.h"
 #include <termbox.h>
 
-void key_control(e.type)
+void key_control(uint16_t key)
 {
  	enum old_mode = *my_slake->slake_mode; //mode right before a change
 	// 	checks that modechange is possible
