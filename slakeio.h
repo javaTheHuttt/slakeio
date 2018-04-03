@@ -104,7 +104,7 @@ void key_control(uint16_t key);
 void slakeio_log(char *str);
 // a fuction that checks weather a position is inside a givin rect 
 // returns true if it's inside
-int in_rect(struct slake_map_t *rect, struct slake_position_t);
+int in_rect(struct slake_map_t *rect, struct *slake_position_t);
 
 
 
