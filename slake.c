@@ -61,19 +61,28 @@ void slake_move(struct slake_t *slake)
 }
 
 
-struct slake_t *slake_init(double head_x, double head_y, int length, enum slake_mode_t mode, double speed)
+struct slake_t *slake_init(double head_x, double head_y, int length, 
+		enum slake_mode_t mode, double speed)
 {
 	// empty slake struct
 	struct slake_t *slake;
 	
 	// from arguments
-	slake->head_x = ;
+	slake->head_x = head_x;
+	slake->head_y = head_y;
 	slake->length = length;
 	slake->mode = mode;
 	slake->speed = speed;
 	
+	// position
 	slake->cells = malloc(sizeof(struct slake_position_t) * length);
-	for (int i = 0; 
+	
+	struct slake_position_t temp_position;
+	for (int i = 0; i < length; i++) {
+		temp_position.x = (int) head_x;
+		temp_position.y = (int) head_y - i; 
+		slake->cells[i] = temp_position;
+	} 
 	
 	return slake;
 
