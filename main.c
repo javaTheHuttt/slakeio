@@ -16,7 +16,7 @@ int main(int argc, char *argv []) {
 	(void)argv;
 	//main loop
 	tb_init();
-	
+	game_init();
 	// -------- Test Slake --------
 	my_slake = slake_init(0.0, 0.0, 5, up, 1.0);
 	all_slakes = malloc(sizeof(struct slake_array_t) * 5);   // ! MAX 5 SLAKES !
