@@ -7,18 +7,18 @@
 
 void key_control(uint16_t key)
 {
- 	enum old_mode = *my_slake->slake_mode; //mode right before a change
+ 	enum slake_mode_t old_mode = my_slake->mode; //mode right before a change
 	// 	checks that modechange is possible
-	if(oldmode == left && e.type == TB_KEY_RIGHT);
- 	if(oldmode == right && e.type == TB_KEY_LEFT);
-	if(oldmode == up && e.type == TB_KEY_DOWN);
-	if(oldmode == down && e.type == TB_KEY_UP);
+	if(old_mode == left && key == TB_KEY_ARROW_RIGHT){;}
+ 	if(old_mode == right && key == TB_KEY_ARROW_LEFT){;}
+	if(old_mode == up && key == TB_KEY_ARROW_DOWN){;}
+	if(old_mode == down && key == TB_KEY_ARROW_UP){;}
 	//	changes mode
-	if(e.type == TB_KEY_LEFT) { *my_slake->slake_mode =left; }	
-	if(e.type == TB_KEY_UP) { *my_slake->slake_mode =up; }
-	if(e.type == TB_KEY_RIGHT) { *my_slake->slake_mode =right; }
-	if(e.type == TB_KEY_DOWN) { *my_slake->slake_mode =down; }
-	}
+	if(key == TB_KEY_ARROW_LEFT) { my_slake->mode =left; }	
+	if(key == TB_KEY_ARROW_UP) { my_slake->mode =up; }
+	if(key == TB_KEY_ARROW_RIGHT) { my_slake->mode =right; }
+	if(key == TB_KEY_ARROW_DOWN) { my_slake->mode =down; }
+	
 }
 
 
