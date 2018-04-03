@@ -25,6 +25,11 @@ struct slake {
 	
 };
 
+static const struct tb_cell empty;
+static const struct tb_cell myslake_player;
+static const struct tb_cell enemy_player;
+
+
 
 struct slake_position {
 	double x;
