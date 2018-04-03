@@ -17,17 +17,6 @@ struct slake_t {
 	//speed (in Zeichen pro Sekunde)
 	double speed; 
 	//functions
-
-<<<<<<< HEAD
-	// creates slake with given parameters
-	struct slake *init(position spawn, int length, enum slake_mode mode);
-	// removes last cell of cells array and adds the first according to mode
-	// changes are made relative to system time
-	void move(struct slake slake_player);	
-=======
-
->>>>>>> 4c95d4a3eff2ba9bd6099742d23891803ee4892e
-	
 	
 };
 

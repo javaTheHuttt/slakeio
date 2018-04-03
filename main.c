@@ -40,15 +40,11 @@ int main(int argc, char *argv []) {
 		case TB_EVENT_KEY:
 			if (e.key == TB_KEY_ESC) {
 				break;
-			}
+			
 		}
-<<<<<<< HEAD
 		default: key_control(e.type);
+		}
 	}
-	}
-=======
->>>>>>> 4c95d4a3eff2ba9bd6099742d23891803ee4892e
 	tb_shutdown();
 	return 0;
-	}
 }
