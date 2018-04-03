@@ -42,8 +42,8 @@ void slake_move(struct slake_t *slake);
 
 // global array that holds all slakes
 struct slake_array_t {
-	struct slake *array;
-	int legth;
+	struct slake_t *array;
+	int length;
 };
 
 
@@ -52,8 +52,8 @@ struct slake_array_t *all_slakes;
 
 //defines a square of cells (used for map size and screen)
 struct slake_map_t {
-	struct slake_position_t upper_left;
-	struct slake_position_t bottom_right;
+	struct slake_position_t *upper_left;
+	struct slake_position_t *bottom_right;
 };
 
 
@@ -77,6 +77,7 @@ int tbw;
 int tbh;
 
 void draw(void);
+
 //
 // CONTROL DECLARATIONS
 //
@@ -86,7 +87,7 @@ void key_control(uint16_t key);
 void slakeio_log(char *str);
 // a fuction that checks weather a position is inside a givin rect 
 // returns true if it's inside
-int in_rect(struct slake_map_t *rect, struct *slake_position_t);
+int in_rect(struct slake_map_t *rect, struct slake_position_t *pos);
 
 
 
