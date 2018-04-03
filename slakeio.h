@@ -73,7 +73,6 @@ struct slake_map_t {
 
 // 
 double start_clock;
-
 double slake_clock(void);
 
 
@@ -91,7 +90,8 @@ void draw(void);
 //
 // CONTROL DECLARATIONS
 //
-
+//checks and changes mode (direction of slake)
+void key_control(e.type);
 // log function to write something to the log.
 void log(char *str);
 
