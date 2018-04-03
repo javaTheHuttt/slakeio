@@ -26,13 +26,14 @@ int main(int argc, char *argv []) {
 		switch (e.type) {
 		case TB_EVENT_KEY:
 			if (e.key == TB_KEY_ESC) {
-				loop = 0;
-			}
-
-		default: key_control(e.key);
-
+				loop = 0;}
+			else key_control(e.key);
+		default:;
 		}
+		
+
 	}
+
 	tb_shutdown();
 	return 0;
 }

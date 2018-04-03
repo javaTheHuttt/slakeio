@@ -4,6 +4,7 @@
 
 #include "slakeio.h"
 #include <termbox.h>
+#include <stdio.h>
 
 void key_control(uint16_t key)
 {
