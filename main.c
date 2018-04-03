@@ -28,7 +28,9 @@ int main(int argc, char *argv []) {
 			if (e.key == TB_KEY_ESC) {
 				loop = 0;
 			}
-		//default: key_control(e.type);
+
+		default: key_control(e.key);
+
 		}
 	}
 	tb_shutdown();
