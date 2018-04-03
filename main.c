@@ -16,7 +16,7 @@ int main(int argc, char *argv []) {
 	(void)argv;
 	//main loop
 	tb_init();
-	
+	game_init();
 	// -------- Test Slake --------
 	struct slake_position_t position;
 	position.x = 0;

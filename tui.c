@@ -72,7 +72,7 @@ void draw(void) {
 			if (in_rect(screen, &(all_slakes->array[s]).cells[c])) {
 				x = ((all_slakes->array[s]).cells[c]).x - screen->upper_left->x;
 				y = ((all_slakes->array[s]).cells[c]).y - screen->upper_left->y;
-				tb_put_cell(x, y, myslake_player);
+				tb_put_cell(x, y, &myslake_player);
 			}
 	
 		}
