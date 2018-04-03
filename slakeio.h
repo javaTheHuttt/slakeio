@@ -1,3 +1,4 @@
+#include <termbox.h>
 //
 // LOGIC DECLARATIONS
 //
@@ -32,7 +33,7 @@ struct slake_position_t {
 
 
 // creates slake with given parameters
-struct slake_t *init(struct slake_position_t spawn, int length, enum slake_mode_t mode);
+struct slake_t *slake_init(struct slake_position_t spawn, int length, enum slake_mode_t mode);
 // removes last cell of cells array and adds the first according to mode
 // changes are made relative to system time
 void slake_move(struct slake_t *slake);
@@ -64,7 +65,7 @@ struct slake_array_t {
 };
 
 
-struct slake_array_t all_slakes;
+struct slake_array_t *all_slakes;
 
 
 //defines a square of cells (used for map size and screen)
