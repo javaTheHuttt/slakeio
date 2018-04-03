@@ -28,7 +28,7 @@ void slake_move(struct slake_t *slake)
 		slake->head_x = (slake->head_x) - delta_distance;
 	}
 	else if(mode == up) {
-		head->y = (head->y) + delta_distance;
+		slake->head_y = (head->y) + delta_distance;
 	}
 	else if(mode == right) {
 		slake->head_x = slake->head_x + delta_distance;
