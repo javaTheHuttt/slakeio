@@ -25,7 +25,11 @@ void key_control(uint16_t key)
 
 int in_rect(struct slake_map_t *rect, struct slake_position_t *pos) {
 	if ((pos->x > slake_map_t->upper_left->x) && 
-		(pos->y > slake_map_t->upper_left->y) 
+		(pos->y > slake_map_t->upper_left->y) &&
+		(pos->x < slake_map_t->bottom_right->x) &&
+		(pos->y < slake_map_t->bottom_right->y))
+	return 1;
+	return 0;
 }
 
 
