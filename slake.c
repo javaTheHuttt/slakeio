@@ -15,7 +15,13 @@ void slake_move(struct slake_t *slake)
 	
 	// storage management
 	head = realloc(head, sizeof(struct slake_position_t) * slake->length);
-		
+	
+	// move slake tail  
+	for(int i = 1; i < slake->length; ++i) {
+		slake->cells[i] = slake->cells[i-1];
+	}
+	slake->cells[0] = 
+	
 	// new head positions
 	if(mode == left) {
 		head->x = (head->x) - delta_distance;
@@ -32,11 +38,6 @@ void slake_move(struct slake_t *slake)
 	else {	// down
 		head->x = head->x;
 		head->y = (head->y) - delta_distance;
-	}
-	
-	// move slake tail  
-	for(int i = 1; i < slake->length; ++i) {
-		slake->cells[i] = slake->cells[i-1];
 	}
 	
 	// update clock after move
