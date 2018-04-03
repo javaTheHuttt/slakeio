@@ -2,6 +2,7 @@
 #include "slakeio.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 static const struct tb_cell empty =
 {
@@ -51,6 +52,7 @@ struct slake_map_t *get_screen(void) {
 	struct slake_map_t *screen = malloc(sizeof(struct slake_map_t));
 	screen->upper_left = screencorner_upper_left;
 	screen->bottom_right = screencorner_bottom_right;
+	
 	return screen;
 }
 
@@ -68,11 +70,12 @@ void draw(void) {
 		// go with c through all cells of the slake
 		for (int c = 0; c < (all_slakes->array[s]).length; c++) {
 			//all_slakes->array[s]).cells[c]
-			
+			//slakeio_log("ich male!");
 			if (in_rect(screen, &(all_slakes->array[s]).cells[c])) {
 				x = ((all_slakes->array[s]).cells[c]).x - screen->upper_left->x;
 				y = ((all_slakes->array[s]).cells[c]).y - screen->upper_left->y;
 				tb_put_cell(x, y, &myslake_player);
+				
 			}
 	
 		}

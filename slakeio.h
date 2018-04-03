@@ -45,6 +45,7 @@ struct slake_t *slake_init(
 // changes are made relative to system time
 void slake_move(struct slake_t *slake);
 
+void game_init(void);
 
 
 // global array that holds all slakes
