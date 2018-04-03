@@ -22,7 +22,7 @@ int main(int argc, char *argv []) {
 	position.x = 0;
 	position.y = 0;
 	 
-	my_slake = slake_init(position, 5, up);
+	my_slake = slake_init(position, 5, up, 1);
 	all_slakes = malloc(sizeof(struct slake_array_t) * 5);   // ! MAX 5 SLAKES !
 	all_slakes[0] = my_slake;
 	
