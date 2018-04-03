@@ -19,7 +19,7 @@ int main(int argc, char *argv []) {
 			if (e.key == TB_KEY_ESC) {
 				break;
 			}
-		default: key_control(e.type);
+		default: key_control(e.key);
 		}
 	}
 	tb_shutdown();
