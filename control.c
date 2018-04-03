@@ -3,7 +3,7 @@
 //
 
 #include "slakeio.h"
-#include "termbox.h"
+#include <termbox.h>
 
 static enum slake_mode key_control(e.type)
 {
@@ -15,7 +15,9 @@ static enum slake_mode key_control(e.type)
 }
 
 
-void log(char *str) {
-	FILE handle = fopen("./log", "a");
-	
+void slakeio_log(char *str) {
+	FILE *handle = fopen("./log", "a");
+	fprintf(handle, str);
+	fprintf(handle, "\n");
+	fclose(handle);
 }

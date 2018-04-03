@@ -93,6 +93,6 @@ void draw(void);
 //
 
 // log function to write something to the log.
-void log(char *str);
+void slakeio_log(char *str);
 
 
