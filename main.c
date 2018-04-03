@@ -18,13 +18,10 @@ int main(int argc, char *argv []) {
 	tb_init();
 	
 	// -------- Test Slake --------
-	struct slake_position_t position;
-	position.x = 0;
-	position.y = 0;
-	 
-	my_slake = slake_init(position, 5, up, 1);
+	my_slake = slake_init(0.0, 0.0, 5, up, 1.0);
 	all_slakes = malloc(sizeof(struct slake_array_t) * 5);   // ! MAX 5 SLAKES !
-	all_slakes[0] = my_slake;
+	all_slakes->array = my_slake;
+	all_slakes->length = 1;
 	
 	int loop = 1;
 	while(loop) {
