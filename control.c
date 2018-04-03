@@ -4,6 +4,8 @@
 
 #include "slakeio.h"
 #include <termbox.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 void key_control(uint16_t key)
 {
@@ -19,6 +21,11 @@ void key_control(uint16_t key)
 	if(key == TB_KEY_ARROW_RIGHT) { my_slake->mode =right; }
 	if(key == TB_KEY_ARROW_DOWN) { my_slake->mode =down; }
 	
+}
+
+int in_rect(struct slake_map_t *rect, struct slake_position_t *pos) {
+	if ((pos->x > slake_map_t->upper_left->x) && 
+		(pos->y > slake_map_t->upper_left->y) 
 }
 
 
