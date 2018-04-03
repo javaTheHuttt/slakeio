@@ -93,6 +93,6 @@ void draw(void);
 //checks and changes mode (direction of slake)
 void key_control(uint16_t key);
 // log function to write something to the log.
-void log(char *str);
+void slakeio_log(char *str);
 
 

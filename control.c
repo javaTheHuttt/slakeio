@@ -3,7 +3,7 @@
 //
 
 #include "slakeio.h"
-#include "termbox.h"
+#include <termbox.h>
 
 void key_control(uint16_t key)
 {
@@ -22,7 +22,9 @@ void key_control(uint16_t key)
 }
 
 
-void log(char *str) {
-	FILE handle = fopen("./log", "a");
-	
+void slakeio_log(char *str) {
+	FILE *handle = fopen("./log", "a");
+	fprintf(handle, str);
+	fprintf(handle, "\n");
+	fclose(handle);
 }
