@@ -3,10 +3,10 @@ CFLAGS = -std=c11 -Wall -Wextra -pedantic -I${HOME}/.local/include -ltermbox -L$
 
 main: tui.c slakeio.h slake.c control.c
 
-tui: main.c tui.c
+tui: main.c tui.c control.c
 
 .PHONY: run_tui
-run_tui: tui control
+run_tui: tui 
 	env LD_LIBRARY_PATH=${HOME}/.local/lib ./tui
 
 .PHONY: run
