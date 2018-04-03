@@ -2,8 +2,7 @@
 #include <time.h>
 #include <math.h>
 
-#include "slakeio.h"
-
+#define SPEED 1
 
 void slake_move(struct slake_t *slake)
 {
@@ -59,5 +58,24 @@ void slake_move(struct slake_t *slake)
 		slake->cells[0].x += x_diff;
 		slake->cells[0].y += y_diff;
 	}
+}
+
+
+struct slake_t *slake_init(double head_x, double head_y, int length, enum slake_mode_t mode, double speed)
+{
+	// empty slake struct
+	struct slake_t *slake;
+	
+	// from arguments
+	slake->head_x = ;
+	slake->length = length;
+	slake->mode = mode;
+	slake->speed = speed;
+	
+	slake->cells = malloc(sizeof(struct slake_position_t) * length);
+	for (int i = 0; 
+	
+	return slake;
+
 }
 
