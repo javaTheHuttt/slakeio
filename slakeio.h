@@ -16,13 +16,16 @@ struct slake_t {
 	double lastmove_clock;
 	//speed (in Zeichen pro Sekunde)
 	double speed; 
-	//functions
+	
+	// head position 
+	double head_x;
+	double head_y;
 	
 };
 
 struct slake_position_t {
-	double x;
-	double y;
+	int x;
+	int y;
 };
 
 // slake functions
