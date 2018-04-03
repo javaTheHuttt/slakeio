@@ -34,6 +34,7 @@ struct slake_position_t {
 
 // creates slake with given parameters
 struct slake_t *slake_init(
+	struct slake_t *slake,
 	double head_x, 
 	double head_y, 
 	int length, 

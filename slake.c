@@ -2,7 +2,7 @@
 #include <time.h>
 #include <math.h>
 
-#define SPEED 1
+#include "slakeio.h"
 
 void slake_move(struct slake_t *slake)
 {
@@ -26,19 +26,19 @@ void slake_move(struct slake_t *slake)
 	
 	// new head positions
 	if(mode == left) {
-		slake->head_x = (slake->head_x) - delta_distance;
+		slake->head_x -= delta_distance;
 		x_diff = -1;
 	}
 	else if(mode == up) {
-		slake->head_y = (head->y) + delta_distance;
+		slake->head_y += delta_distance;
 		y_diff = -1;
 	}
 	else if(mode == right) {
-		slake->head_x = slake->head_x + delta_distance;
+		slake->head_x += delta_distance;
 		x_diff = 1;
 	}
 	else {	// down
-		slake->head_y = slake->head_y - delta_distance;
+		slake->head_y -= delta_distance;
 		y_diff = 1;
 	}
 	
@@ -61,11 +61,9 @@ void slake_move(struct slake_t *slake)
 }
 
 
-struct slake_t *slake_init(double head_x, double head_y, int length, 
-		enum slake_mode_t mode, double speed)
+struct slake_t *slake_init(struct slake_t *slake, double head_x, double head_y, 
+	int length, enum slake_mode_t mode, double speed)
 {
-	// empty slake struct
-	struct slake_t *slake;
 	
 	// from arguments
 	slake->head_x = head_x;
@@ -73,6 +71,7 @@ struct slake_t *slake_init(double head_x, double head_y, int length,
 	slake->length = length;
 	slake->mode = mode;
 	slake->speed = speed;
+	slake->lastmove_clock = clock();
 	
 	// position
 	slake->cells = malloc(sizeof(struct slake_position_t) * length);
