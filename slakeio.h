@@ -17,9 +17,6 @@ struct slake_t {
 	//speed (in Zeichen pro Sekunde)
 	double speed; 
 	//functions
-
-
-	
 	
 };
 
@@ -37,14 +34,24 @@ struct slake_t *init(struct slake_position_t spawn, int length, enum slake_mode_
 // changes are made relative to system time
 void slake_move(struct slake_t *slake);
 
-static const struct tb_cell empty;
-static const struct tb_cell myslake_player;
-static const struct tb_cell enemy_player;
-
-
-
-
-
+static const struct tb_cell empty =
+{
+	.ch = ' ',
+	.fg = TB_DEFAULT,
+	.bg = TB_DEFAULT,
+};
+static const struct tb_cell myslake_player =
+{
+	.ch = ' ',
+	.fg = TB_DEFAULT,
+	.bg = TB_GREEN,
+};
+static const struct tb_cell enemy_player =
+{
+	.ch = ' ',
+	.fg = TB_DEFAULT,
+	.bg = TB_RED,
+};
 
 
 // global array that holds all slakes
@@ -66,7 +73,6 @@ struct slake_map_t {
 
 // 
 double start_clock;
-
 double slake_clock(void);
 
 
@@ -81,5 +87,12 @@ int tbw;
 int tbh;
 
 void draw(void);
+//
+// CONTROL DECLARATIONS
+//
+//checks and changes mode (direction of slake)
+void key_control(e.type);
+// log function to write something to the log.
+void slakeio_log(char *str);
 
 
