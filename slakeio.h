@@ -91,7 +91,7 @@ void draw(void);
 // CONTROL DECLARATIONS
 //
 //checks and changes mode (direction of slake)
-void key_control(e.type);
+void key_control(uint16_t key);
 // log function to write something to the log.
 void log(char *str);
 
