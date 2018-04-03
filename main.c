@@ -40,8 +40,7 @@ int main(int argc, char *argv []) {
 		case TB_EVENT_KEY:
 			if (e.key == TB_KEY_ESC) {
 				break;
-			
-		}
+			}
 		default: key_control(e.type);
 		}
 	}

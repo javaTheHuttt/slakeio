@@ -78,5 +78,11 @@ int tbw;
 int tbh;
 
 void draw(void);
+//
+// CONTROL DECLARATIONS
+//
+
+// log function to write something to the log.
+void log(char *str);
 
 
