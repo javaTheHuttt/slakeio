@@ -21,7 +21,7 @@ struct slake {
 	struct slake *init(position spawn, int length, enum slake_mode mode);
 	// removes last cell of cells array and adds the first according to mode
 	// changes are made relative to system time
-	void move(void);	
+	void move(struct slake slake_player);	
 	
 };
 

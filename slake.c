@@ -4,7 +4,7 @@ return 0;
 }
 
 //move
-void move(struct slake)
+void move(struct slake slake_player)
 {
 	struct slake_position head = slake->cells;
 	enum slake_mode mode = slake->mode;

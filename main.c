@@ -35,6 +35,8 @@ int main(int argc, char *argv []) {
 		if (e.key == TB_KEY_ESC) {
 			break;
 		}
+		default: key_control(e.type);
+	}
 	}
 	tb_shutdown();
 	return 0;
