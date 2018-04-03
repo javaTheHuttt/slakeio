@@ -1,3 +1,4 @@
+#include <termbox.h>
 //
 // LOGIC DECLARATIONS
 //
