@@ -3,6 +3,25 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+static const struct tb_cell empty =
+{
+	.ch = ' ',
+	.fg = TB_DEFAULT,
+	.bg = TB_DEFAULT,
+};
+static const struct tb_cell myslake_player =
+{
+	.ch = ' ',
+	.fg = TB_DEFAULT,
+	.bg = TB_GREEN,
+};
+static const struct tb_cell enemy_player =
+{
+	.ch = ' ',
+	.fg = TB_DEFAULT,
+	.bg = TB_RED,
+};
+
 
 void init_tui(void) {
 	int tbe = tb_init();
@@ -38,20 +57,25 @@ struct slake_map_t *get_screen(void) {
 void draw(void) {
 	struct slake_map_t *screen = get_screen();
 	// go with s through all slakes
-
 	int x;
 	int y;
 
+
+	tb_clear();
 	for(int s = 0; s < all_slakes->length; s++) {
 		// go with c through all cells of the slake
 		for (int c = 0; c < (all_slakes->array[s]).length; c++) {
-			x=((all_slakes->array[s]).cells[c]).x;
-			y=((all_slakes->array[s]).cells[c]).y;
+			all_slakes->array[s]).cells[c]
 			
-			if (x < screencorner_upper_left->x && x
+			if (in_rect(screen, (all_slakes->array[s]).cells[c])) {
+				x = ((all_slakes->array[s]).cells[c]).x - screen->upper_left->x;
+				y = ((all_slakes->array[s]).cells[c]).y - screen->upper_left->y;
+				tb_put_cell(x, y, myslake_player);
+			}
 	
 		}
 	}
-		
+	
+	tb_present();	
 
 }
