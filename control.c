@@ -5,9 +5,16 @@
 #include "slakeio.h"
 #include <termbox.h>
 
-static enum slake_mode key_control(e.type)
+void key_control(e.type)
 {
-	if(e.type == TB_KEY_LEFT) {  *my_slake->slake_mode =left; }	
+ 	enum old_mode = *my_slake->slake_mode; //mode right before a change
+	// 	checks that modechange is possible
+	if(oldmode == TB_KEY_LEFT && e.type == TB_KEY_RIGHT);
+ 	if(oldmode == TB_KEY_RIGHT && e.type == TB_KEY_LEFT);
+	if(oldmode == TB_KEY_UP && e.type == TB_KEY_DOWN);
+	if(oldmode == TB_KEY_DOWN && e.type == TB_KEY_UP);
+	//	changes mode
+	if(e.type == TB_KEY_LEFT) { *my_slake->slake_mode =left; }	
 	if(e.type == TB_KEY_UP) { *my_slake->slake_mode =up; }
 	if(e.type == TB_KEY_RIGHT) { *my_slake->slake_mode =right; }
 	if(e.type == TB_KEY_DOWN) { *my_slake->slake_mode =down; }
