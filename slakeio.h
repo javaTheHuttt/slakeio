@@ -65,7 +65,7 @@ struct slake_array_t {
 };
 
 
-struct slake_array_t all_slakes;
+struct slake_array_t *all_slakes;
 
 
 //defines the size of the map
