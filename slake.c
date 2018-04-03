@@ -20,7 +20,6 @@ void slake_move(struct slake_t *slake)
 	for(int i = 1; i < slake->length; ++i) {
 		slake->cells[i] = slake->cells[i-1];
 	}
-	slake->cells[0] = 
 	
 	// new head positions
 	if(mode == left) {
