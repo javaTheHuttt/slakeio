@@ -6,7 +6,7 @@ enum slake_mode_t {left, up, right, down};
 
 struct slake_t {
 	//data
-	struct slake_position *cells;
+	struct slake_position_t *cells;
 	//direction of movement
 	enum slake_mode_t mode;
 	// score or length of slake
@@ -22,7 +22,14 @@ struct slake_t {
 	
 	
 };
+
+struct slake_position_t {
+	double x;
+	double y;
+};
+
 // slake functions
+
 
 // creates slake with given parameters
 struct slake_t *init(struct slake_position_t spawn, int length, enum slake_mode_t mode);
@@ -37,10 +44,7 @@ static const struct tb_cell enemy_player;
 
 
 
-struct slake_position_t {
-	double x;
-	double y;
-};
+
 
 
 // global array that holds all slakes
@@ -71,6 +75,10 @@ struct slake_t *my_slake;
 //
 // TUI DECLARATIONS
 //
+
+//terminal width & height
+int tbw;
+int tbh;
 
 void draw(void);
 

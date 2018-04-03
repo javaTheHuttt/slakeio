@@ -14,7 +14,7 @@ void init_tui(void) {
 
 void draw(void) {
 	//screen center shoudl be the position of the head of the slake
-	struct slake_position screen_center = my_slake->cells[0];
+	struct slake_position_t *screen_center = &(my_slake->cells[0]);
 	 
 
 }
