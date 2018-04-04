@@ -1,4 +1,5 @@
 #include <termbox.h>
+#include <stdio.h>
 //
 // LOGIC DECLARATIONS
 //
