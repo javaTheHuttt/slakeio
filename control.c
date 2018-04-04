@@ -9,16 +9,16 @@
 
 void game_init(void) {
 	//initialize map
-	struct slakio_position_t pos1 = malloc(sizeof(struct slakio_position_t)); 
+	struct slake_position_t *pos1 = malloc(sizeof(struct slake_position_t)); 
 	pos1->x = 0;
 	pos1->y = 0;
-	struct slakio_position_t pos2 = malloc(sizeof(struct slakio_position_t)); 
+	struct slake_position_t *pos2 = malloc(sizeof(struct slake_position_t)); 
 
 	//size of the map
 	pos2->x = 1000;
 	pos2->y = 1000;
 	
-	map = malloc(sizeof(struct slakio_map_t));
+	struct slake_map_t *map = malloc(sizeof(struct slake_map_t));
 	map->upper_left = pos1;
 	map->bottom_right = pos2;
 
