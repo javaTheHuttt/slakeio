@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -std=c11 -Wall -Wextra -pedantic -I${HOME}/.local/include -ltermbox -L${HOME}/.local/lib -lm
 
-main: tui.c slakeio.h slake.c control.c
+main: tui.c slakeio.h slake.c control.c debug.c
 
 tui: main.c tui.c control.c
 
