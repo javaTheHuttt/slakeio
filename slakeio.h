@@ -95,3 +95,6 @@ void key_control(uint16_t key);
 // returns true if it's inside
 int in_rect(struct slake_map_t *rect, struct slake_position_t *pos);
 
+// log file
+FILE *log;
+

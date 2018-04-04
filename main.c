@@ -7,13 +7,21 @@
 int main(int argc, char *argv []) {
 	(void)argc;
 	(void)argv;
+    
+    // log file
+    log = fopen(".log", "w+");
+    if (!log) {
+        perror("Unable to open log file! ");
+        return 1;
+    }
+    
 	//main loop
 	tb_init();
 	game_init();
 	// -------- Test Slake --------
 	all_slakes = malloc(sizeof(struct slake_array_t));
 	all_slakes->array = malloc(sizeof(struct slake_t) * 1);
-	slakeio_log("Soweit, so gut!");
+	fprintf(log, "So weit so gut");
 	all_slakes->length = 1;
 	my_slake = slake_init(&all_slakes->array[0], 0.0, 0.0, 5, up, 1.0);
 	
@@ -40,6 +48,7 @@ int main(int argc, char *argv []) {
 	}
 
 	tb_shutdown();
+    fclose(log);
 	return 0;
 }
 
