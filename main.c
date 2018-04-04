@@ -9,7 +9,7 @@ int main(int argc, char *argv []) {
 	(void)argv;
     
     // log file
-    log = fopen(".log", "w+");
+    slake_log = fopen(".log", "w+");
     if (!log) {
         perror("Unable to open log file! ");
         return 1;
@@ -21,7 +21,7 @@ int main(int argc, char *argv []) {
 	// -------- Test Slake --------
 	all_slakes = malloc(sizeof(struct slake_array_t));
 	all_slakes->array = malloc(sizeof(struct slake_t) * 1);
-	fprintf(log, "So weit so gut");
+	fprintf(slake_log, "So weit so gut");
 	all_slakes->length = 1;
 	my_slake = slake_init(&all_slakes->array[0], 0.0, 0.0, 5, up, 1.0);
 	
