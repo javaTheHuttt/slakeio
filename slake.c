@@ -45,6 +45,13 @@ void slake_move(struct slake_t *slake)
 	// update clock after move
 	slake->lastmove_clock = clock();
 
+	/*if (!(in_rect(map, &(slake->cells[0])))) {
+		slake->head_x = old_head_x;
+		slake->head_y = old_head_y;
+		slake->mode += 1;
+		return;
+	};*/
+
 	int head_delta_distance_x = (int)(round(old_head_x)-round(slake->head_x));
 	int head_delta_distance_y = (int)(round(old_head_y)-round(slake->head_y));
 	for (int i = 0; i < abs(head_delta_distance_x) + abs(head_delta_distance_y); i++) {
