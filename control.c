@@ -51,10 +51,3 @@ int in_rect(struct slake_map_t *rect, struct slake_position_t *pos) {
 	return 0;
 }
 
-
-void slakeio_log(char *str) {
-	FILE *handle = fopen("./log", "a");
-	fprintf(handle, str);
-	fprintf(handle, "\n");
-	fclose(handle);
-}
