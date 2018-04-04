@@ -8,6 +8,7 @@
 int main(int argc, char *argv []) {
 	(void)argc;
 	(void)argv;
+
     
     // log file
     slake_log = fopen(LOG_FILE, "w");     // clear 
@@ -16,6 +17,7 @@ int main(int argc, char *argv []) {
         return 1;
     }
     
+
 	//main loop
 	fprintf(slake_log, "Call tb_init\n");
 	tb_init();
@@ -54,6 +56,7 @@ int main(int argc, char *argv []) {
 
 	fprintf(slake_log, "Call tb_shutdown\n");
 	tb_shutdown();
+	return 0;
     
     fprintf(slake_log, "Print %s\n", LOG_FILE);
     // log stuff
