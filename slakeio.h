@@ -66,7 +66,7 @@ struct slake_map_t {
 
 
 // defines the size of the map
-struct slake_map_t map;
+struct slake_map_t *map;
 
 
 // 
