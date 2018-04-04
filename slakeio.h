@@ -41,7 +41,7 @@ struct slake_position_t {
 	int x;
 	int y;
 };*/
-struct slake_position_t check_food(struct slake_position_t *head);
+struct slake_position_t check_food(struct slake_t slake);
 
 struct slake_position_t *food;
 
