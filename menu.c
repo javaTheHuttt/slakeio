@@ -76,6 +76,18 @@ int main(void)
 			}
 		}
 		}
+		tb_peek_event(&input, 100);
+		
+		if(input.key == TB_KEY_ESC)
+		{
+			goto exit;}
+		if(input.key == TB_KEY_ENTER)
+		{
+			put_menu_option(start, TB_GREEN, welcome_begin+start_begin,welcome_height+5);}
+			
+		}
+		
+	
 exit:
 	tb_shutdown();
 return(0);
