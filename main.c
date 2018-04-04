@@ -10,7 +10,7 @@ int main(int argc, char *argv []) {
     
     // log file
     slake_log = fopen(".log", "w+");
-    if (!log) {
+    if (!slake_log) {
         perror("Unable to open log file! ");
         return 1;
     }
