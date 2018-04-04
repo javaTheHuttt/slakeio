@@ -37,12 +37,15 @@ struct slake_position_t {
 };
 
 //food
-//--functions
+//
+//-functions
+//--- init random food-coordinates and puts them in array food
+void init_food(void);
 //---checks if slake ate food
 int check_food(struct slake_t *slake);
 //---replaces used food-koordination with new one
 void replace_food(int index_used_food);
-//--food array
+//-food array
 struct slake_position_t *food;
 
 // slake functions

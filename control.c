@@ -9,6 +9,7 @@
 #include <time.h>
 #include <math.h>
 
+//init 300 random food-coordinates
 void init_food(void)
 {
 	
@@ -19,6 +20,7 @@ void init_food(void)
 	}
 }
 
+//checks if slake ate food
 int check_food(struct slake_t *slake)
 {
 	for(int i = 0; i<300; i++)
@@ -30,18 +32,20 @@ int check_food(struct slake_t *slake)
 			break;
 		}
 	}
-	return (-1); //slake isst nichts -> MAP_END returnt
+	return (-1); //slake ate nothing
 
 }
 
+//if slake ate food this functions creats new food-coordinate
 void replace_food(int place)
 {
-	if(place>=0) //(food[0].x != map->upper_left->x || food[0].y != map->upper_left->y)
+	if(place>=0)
 	{
 		food[place].x = rand() % 1000;
 		food[place].y = rand() % 1000;
 	}
 }
+
 
 void game_init(void) {
 	//initialize map
@@ -58,23 +62,26 @@ void game_init(void) {
 	map->upper_left = pos1;
 	map->bottom_right = pos2;
 
-	//food
+	//initialize food
 	srand(time(NULL));	
 	food = malloc(sizeof(struct slake_position_t)*300);
 	init_food();
+
 	init_tui();
 
 
 }
+
+//handles key-input
 void key_control(uint16_t key)
 {
  	enum slake_mode_t old_mode = my_slake->mode; //mode right before a change
-	// 	checks that modechange is possible
+	// checks if mode-change is possible
 	if((old_mode == left && key == TB_KEY_ARROW_RIGHT) || (old_mode == left && key == TB_KEY_ARROW_LEFT)){goto end;}
  	if((old_mode == right && key == TB_KEY_ARROW_LEFT) || (old_mode == right && key == TB_KEY_ARROW_RIGHT)){goto end;}
 	if((old_mode == up && key == TB_KEY_ARROW_DOWN) || (old_mode == up && key == TB_KEY_ARROW_UP)){goto end;}
 	if((old_mode == down && key == TB_KEY_ARROW_UP) || (old_mode == down && key == TB_KEY_ARROW_DOWN)){goto end;}
-	//	changes mode
+	// changes mode
 	if(key == TB_KEY_ARROW_LEFT) { my_slake->mode =left; }	
 	if(key == TB_KEY_ARROW_UP) { my_slake->mode =up; }
 	if(key == TB_KEY_ARROW_RIGHT) { my_slake->mode =right; }
