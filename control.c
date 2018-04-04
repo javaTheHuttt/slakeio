@@ -73,7 +73,7 @@ void game_init(void) {
 	srand(time(NULL));	
 	food = malloc(sizeof(struct slake_position_t)*300);
 	rand_food_pos();
-	check_food_amount(check_food(*my_slake));	
+	check_food(*my_slake);	
 	init_tui();
 
 
