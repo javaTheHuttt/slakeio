@@ -17,15 +17,18 @@ int main(int argc, char *argv []) {
     }
     
 	//main loop
+	fprintf(slake_log, "Call tb_init\n");
 	tb_init();
-	game_init();
+	fprintf(slake_log, "Call game_init\n");
+    game_init();
 	// -------- Test Slake --------
+    fprintf(slake_log, "Init test slake\n");
 	all_slakes = malloc(sizeof(struct slake_array_t));
 	all_slakes->array = malloc(sizeof(struct slake_t) * 1);
-	fprintf(slake_log, "So weit so gut.\n");
 	all_slakes->length = 1;
 	my_slake = slake_init(&all_slakes->array[0], 0.0, 0.0, 5, up, 1.0);
 	
+    fprintf(slake_log, "Start main loop\n");
 	int loop = 1;
 	
 	while(loop) {
@@ -35,6 +38,7 @@ int main(int argc, char *argv []) {
 		switch (e.type) {
 		case TB_EVENT_KEY:
 			if (e.key == TB_KEY_ESC) {
+                fprintf(slake_log, "ESC key detected\n");
 				loop = 0;}
 			else key_control(e.key);
 		}
@@ -48,8 +52,10 @@ int main(int argc, char *argv []) {
 		draw();
 	}
 
+	fprintf(slake_log, "Call tb_shutdown\n");
 	tb_shutdown();
     
+    fprintf(slake_log, "Print %s\n", LOG_FILE);
     // log stuff
     fclose(slake_log);  // close for writing
     slake_log = fopen(LOG_FILE, "r");   // open for reading
