@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <math.h>
 
 void rand_food_pos(void)
 {
@@ -18,11 +19,11 @@ void rand_food_pos(void)
 	}
 }
 
-struct slake_position_t check_food(struct slake_position_t *head)
+struct slake_position_t check_food(struct slake_t slake)
 {
 	for(int i = 0; i<300; i++)
 	{
-		if( head[0].x == food[i].x && head[0].y == food[i].y)
+		if( (round(slake.head_x)) == food[i].x && (round(slake.head_y)) == food[i].y)
 		{
 			return food[i]; //slake ate food 
 			//TODO slake grows
@@ -31,7 +32,7 @@ struct slake_position_t check_food(struct slake_position_t *head)
 	}
 	struct slake_position_t end;
 	end.x = MAP_SIZE_X;
-	end.y = MAP_SIZE_Y;	
+	end.y = MAP_SIZE_Y;
 	return end; //slake isst nichts -> MAP_END returnt
 
 }
@@ -41,6 +42,15 @@ void init_food(void)
 	for(int i = 0; i<300; i++)
 	{
 		tb_change_cell('+', TB_RED, TB_DEFAULT, food[i].x, food[i].y);
+	}
+}
+
+void check_food_amount(struct slake_position_t food)
+{
+	if(food.x != MAP_SIZE_X || food.y != MAP_SIZE_Y)
+	{
+		food.x = rand() % 1000;
+		food.y = rand() % 1000;
 	}
 }
 
@@ -63,8 +73,7 @@ void game_init(void) {
 	srand(time(NULL));	
 	food = malloc(sizeof(struct slake_position_t)*300);
 	rand_food_pos();
-	init_food();
-	
+	check_food_amount(check_food(*my_slake));	
 	init_tui();
 
 
