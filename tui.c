@@ -22,6 +22,12 @@ static const struct tb_cell enemy_player =
 	.fg = TB_DEFAULT,
 	.bg = TB_RED,
 };
+static const struct tb_cell map_border =
+{
+	.ch = '#',
+	.fg = TB_BOLD,
+	.bg = TB_WHITE,
+};
 
 
 void init_tui(void) {
@@ -80,6 +86,20 @@ void draw(void) {
 	
 		}
 	}
+	/*if ((! in_rect(map, screen->upper_left))) {
+		for(int x = 0;x <= (screen->upper_left->x - map->upper_left->x); x++) {
+			for(int y = 0; y <= (screen->upper_left->y - map->upper_left->y); y++) {
+				tb_put_cell(x, y, &map_border);
+			}
+		}
+	}
+	else if ((!in_rect(map, screen->bottom_right))) {
+		for(int x = screen->bottom_right->x - map->bottom_right->x; x >= 0; x--) {
+			for(int y = screen->bottom_right->y - map->bottom_right->y; y >= 0; y--) {
+				tb_put_cell(x, y, &map_border);
+			}
+		}
+	}*/
 	
 	tb_present();	
 
