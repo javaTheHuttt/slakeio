@@ -63,6 +63,22 @@ struct slake_map_t *get_screen(void) {
 	return screen;
 }
 
+void show_coordinates(int x, int y) {
+	char *str = malloc(sizeof(char) *20);
+	int len = 14;
+	sprintf(str, "x: %d, y: %d", x, y);
+	static struct tb_cell text =
+		{
+			.fg = TB_BOLD,
+			.bg = TB_WHITE,
+		};
+	for(int i = 0; i < len; i++) {
+		text.ch = str[i];
+		tb_put_cell(i, 0, &text);
+	}
+	
+}
+
 
 
 void draw(void) {
@@ -86,6 +102,7 @@ void draw(void) {
 	
 		}
 	}
+	show_coordinates(my_slake->cells[0].x, my_slake->cells[0].y);
 	/*if ((! in_rect(map, screen->upper_left))) {
 		for(int x = 0;x <= (screen->upper_left->x - map->upper_left->x); x++) {
 			for(int y = 0; y <= (screen->upper_left->y - map->upper_left->y); y++) {

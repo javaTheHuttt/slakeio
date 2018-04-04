@@ -30,7 +30,7 @@ int main(int argc, char *argv []) {
 	all_slakes->length = 1;
 	my_slake = slake_init(&all_slakes->array[0], 0.0, 0.0, 5, up, 1);
 	
-    fprintf(slake_log, "Start main loop\n");
+    	fprintf(slake_log, "Start main loop\n");
 	int loop = 1;
 	
 	while(loop) {
@@ -40,8 +40,10 @@ int main(int argc, char *argv []) {
 		switch (e.type) {
 		case TB_EVENT_KEY:
 			if (e.key == TB_KEY_ESC) {
-                fprintf(slake_log, "ESC key detected\n");
-				loop = 0;}
+                		fprintf(slake_log, "ESC key detected\n");
+				loop = 0;
+				tb_shutdown();
+			}
 			else key_control(e.key);
 		}
 		// iterate over all slakes

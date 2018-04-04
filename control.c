@@ -53,8 +53,8 @@ void game_init(void) {
 	map->bottom_right = pos2;
 
 	//food
-	struct slake_position_t *food = malloc(sizeof(struct slake_position_t)*300);
-	rand_food_pos();
+	//struct slake_position_t *food = malloc(sizeof(struct slake_position_t)*300);
+	//rand_food_pos();
 
 	init_tui();
 
