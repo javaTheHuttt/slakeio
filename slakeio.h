@@ -1,7 +1,5 @@
 #include <termbox.h>
-
-
-
+#include <stdio.h>
 
 //
 // LOGIC DECLARATIONS
@@ -102,7 +100,6 @@ void slakeio_log(char *str);
 int in_rect(struct slake_map_t *rect, struct slake_position_t *pos);
 
 
-
-
-
+// log file
+FILE *slake_log;
 
