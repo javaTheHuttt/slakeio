@@ -48,7 +48,7 @@ int main(int argc, char *argv []) {
 	}
 
 	tb_shutdown();
-    fclose(log);
+    fclose(slake_log);
 	return 0;
 }
 
