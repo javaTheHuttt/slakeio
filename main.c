@@ -28,7 +28,7 @@ int main(int argc, char *argv []) {
 	all_slakes = malloc(sizeof(struct slake_array_t));
 	all_slakes->array = malloc(sizeof(struct slake_t) * 1);
 	all_slakes->length = 1;
-	my_slake = slake_init(&all_slakes->array[0], 0.0, 0.0, 5, up, 1.0);
+	my_slake = slake_init(&all_slakes->array[0], 0.0, 0.0, 5, up, 1);
 	
     fprintf(slake_log, "Start main loop\n");
 	int loop = 1;
@@ -53,23 +53,24 @@ int main(int argc, char *argv []) {
 		} 
 		draw();
 	}
+	tb_shutdown();
 
 	fprintf(slake_log, "Call tb_shutdown\n");
-	tb_shutdown();
-	return 0;
-    
-    fprintf(slake_log, "Print %s\n", LOG_FILE);
-    // log stuff
-    fclose(slake_log);  // close for writing
-    slake_log = fopen(LOG_FILE, "r");   // open for reading
-    char buf[1024];
-    size_t bytes_read;
-    while (!feof(slake_log)) {
-        bytes_read = fread(buf, sizeof(buf[0]), sizeof(buf), slake_log);
-        fwrite(buf, sizeof(buf[0]), bytes_read, stderr);
-    }
-    fclose(slake_log);
 	
-    return 0;
+	
+    
+	fprintf(slake_log, "Print %s\n", LOG_FILE);
+	// log stuff
+	fclose(slake_log);  // close for writing
+	slake_log = fopen(LOG_FILE, "r");   // open for reading
+	char buf[1024];
+	size_t bytes_read;
+	while (!feof(slake_log)) {
+	bytes_read = fread(buf, sizeof(buf[0]), sizeof(buf), slake_log);
+	fwrite(buf, sizeof(buf[0]), bytes_read, stderr);
+	}
+	fclose(slake_log);
+
+	return 0;
 }
 

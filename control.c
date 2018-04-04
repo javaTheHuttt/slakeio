@@ -23,6 +23,9 @@ void game_init(void) {
 	map->bottom_right = pos2;
 
 
+	init_tui();
+
+
 }
 void key_control(uint16_t key)
 {
@@ -46,8 +49,9 @@ int in_rect(struct slake_map_t *rect, struct slake_position_t *pos) {
 	if ((pos->x > rect->upper_left->x) && 
 		(pos->y > rect->upper_left->y) &&
 		(pos->x < rect->bottom_right->x) &&
-		(pos->y < rect->bottom_right->y))
-	return 1;
+		(pos->y < rect->bottom_right->y)) {
+			return 1;
+		}
 	return 0;
 }
 

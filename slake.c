@@ -13,7 +13,7 @@ void slake_move(struct slake_t *slake)
 	enum slake_mode_t mode = slake->mode;
 	
 	// expected distance since last move
-	double delta_distance = slake->speed * slake->lastmove_clock;
+	double delta_distance = slake->speed * slake->lastmove_clock / 1000;
 	
 	// storage management
 	slake->cells = realloc(slake->cells, sizeof(struct slake_position_t) * slake->length);
