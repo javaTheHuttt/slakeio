@@ -64,30 +64,31 @@ int main(void)
 		//Input
 		struct tb_event input;
 		char *letsgo = "LETS GO";
+		
+		struct tb_event begin;
+
 		tb_peek_event(&input, 100);
-		while(1){
 		switch(input.key){
 			case TB_KEY_ESC:
 				goto exit;
 			case TB_KEY_ENTER:
 				put_menu_option(start, TB_GREEN, welcome_begin+start_begin,welcome_height+5);
 				tb_present();
-				break;
+				tb_peek_event(&begin, 100);
+				switch(begin.key){
+				case TB_KEY_ESC:
+					goto exit;
+				case TB_KEY_ENTER:
+					goto game;
+				}
 			}
-		}
-		}
-		tb_peek_event(&input, 100);
-		
-		if(input.key == TB_KEY_ESC)
-		{
-			goto exit;}
-		if(input.key == TB_KEY_ENTER)
-		{
-			put_menu_option(start, TB_GREEN, welcome_begin+start_begin,welcome_height+5);}
-			
-		}
 		
 	
+	}		
+game:
+					put_menu_option("Ha", TB_RED, 1,1);
+			pause();
+
 exit:
 	tb_shutdown();
 return(0);

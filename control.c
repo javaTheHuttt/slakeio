@@ -6,6 +6,36 @@
 #include <termbox.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
+
+void rand_food_pos(void)
+{
+	srand(time(NULL));	
+
+	for(int i = 0; i<300; i++)
+	{
+		food[i].x = rand() % 1000;
+		food[i].y = rand() % 1000;
+	}
+}
+
+struct slake_position_t check_food(struct slake_position_t *head)
+{
+	for(int i = 0; i<300; i++)
+	{
+		if( head[0].x == food[i].x && head[0].y == food[i].y)
+		{
+			return food[i]; //slake ate food 
+			//TODO slake grows
+			break;
+		}
+	}
+	struct slake_position_t end;
+	end.x = MAP_SIZE_X;
+	end.y = MAP_SIZE_Y;	
+	return end;
+
+}
 
 void game_init(void) {
 	//initialize map
@@ -22,6 +52,9 @@ void game_init(void) {
 	map->upper_left = pos1;
 	map->bottom_right = pos2;
 
+	//food
+	struct slake_position_t *food = malloc(sizeof(struct slake_position_t)*300);
+	rand_food_pos();
 
 	init_tui();
 
@@ -54,4 +87,3 @@ int in_rect(struct slake_map_t *rect, struct slake_position_t *pos) {
 		}
 	return 0;
 }
-
