@@ -23,7 +23,7 @@ int main(int argc, char *argv []) {
 	all_slakes = malloc(sizeof(struct slake_array_t));
 	all_slakes->array = malloc(sizeof(struct slake_t) * 1);
 	all_slakes->length = 1;
-	my_slake = slake_init(&all_slakes->array[0], 0.0, 0.0, 5, up, 1);
+	my_slake = slake_init(&all_slakes->array[0], (double)(MAP_SIZE_X / 2), (double)(MAP_SIZE_Y / 2), 5, up, 1);
 	
     	write_log("Start main loop\n");
 	int loop = 1;
