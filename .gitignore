@@ -56,3 +56,6 @@ termbox
 
 # Swap-Datein
 *.swp
+
+# Log file
+.log

@@ -1,4 +1,5 @@
 #include <termbox.h>
+#include <stdio.h>
 //
 // LOGIC DECLARATIONS
 //
@@ -74,7 +75,7 @@ struct slake_map_t {
 
 
 // defines the size of the map
-struct slake_map_t map;
+struct slake_map_t *map;
 
 
 // 
@@ -99,14 +100,9 @@ void draw(void);
 //
 //checks and changes mode (direction of slake)
 void key_control(uint16_t key);
-// log function to write something to the log.
-void slakeio_log(char *str);
 // a fuction that checks weather a position is inside a givin rect 
 // returns true if it's inside
 int in_rect(struct slake_map_t *rect, struct slake_position_t *pos);
 
-
-
-
-
-
+// log file
+FILE *slake_log;

@@ -8,8 +8,22 @@
 #include <stdio.h>
 
 void game_init(void) {
-	
+	//initialize map
+	struct slake_position_t *pos1 = malloc(sizeof(struct slake_position_t)); 
+	pos1->x = 0;
+	pos1->y = 0;
+	struct slake_position_t *pos2 = malloc(sizeof(struct slake_position_t)); 
 
+	//size of the map
+	pos2->x = 1000;
+	pos2->y = 1000;
+	
+	struct slake_map_t *map = malloc(sizeof(struct slake_map_t));
+	map->upper_left = pos1;
+	map->bottom_right = pos2;
+
+
+}
 void key_control(uint16_t key)
 {
  	enum slake_mode_t old_mode = my_slake->mode; //mode right before a change
@@ -36,13 +50,3 @@ int in_rect(struct slake_map_t *rect, struct slake_position_t *pos) {
 	return 1;
 	return 0;
 }
-
-
-void slakeio_log(char *str) {
-	FILE *handle = fopen("./log", "a");
-	fprintf(handle, str);
-	fprintf(handle, "\n");
-	fclose(handle);
-}
-
-
