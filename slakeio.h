@@ -33,46 +33,40 @@ struct slake_position_t {
 
 
 // creates slake with given parameters
-struct slake_t *init(struct slake_position_t spawn, int length, enum slake_mode_t mode);
+struct slake_t *slake_init(
+	struct slake_t *slake,
+	double head_x, 
+	double head_y, 
+	int length, 
+	enum slake_mode_t mode,
+	double speed
+);
 // removes last cell of cells array and adds the first according to mode
 // changes are made relative to system time
 void slake_move(struct slake_t *slake);
 
-static const struct tb_cell empty =
-{
-	.ch = ' ',
-	.fg = TB_DEFAULT,
-	.bg = TB_DEFAULT,
-};
-static const struct tb_cell myslake_player =
-{
-	.ch = ' ',
-	.fg = TB_DEFAULT,
-	.bg = TB_GREEN,
-};
-static const struct tb_cell enemy_player =
-{
-	.ch = ' ',
-	.fg = TB_DEFAULT,
-	.bg = TB_RED,
-};
+void game_init(void);
 
 
 // global array that holds all slakes
 struct slake_array_t {
-	struct slake *array;
-	int legth;
+	struct slake_t *array;
+	int length;
 };
 
 
-struct slake_array_t all_slakes;
+struct slake_array_t *all_slakes;
 
 
-//defines the size of the map
+//defines a square of cells (used for map size and screen)
 struct slake_map_t {
-	struct slake_position_t upper_left;
-	struct slake_position_t bottom_right;
+	struct slake_position_t *upper_left;
+	struct slake_position_t *bottom_right;
 };
+
+
+// defines the size of the map
+struct slake_map_t map;
 
 
 // 
@@ -91,6 +85,7 @@ int tbw;
 int tbh;
 
 void draw(void);
+
 //
 // CONTROL DECLARATIONS
 //
@@ -98,5 +93,12 @@ void draw(void);
 void key_control(uint16_t key);
 // log function to write something to the log.
 void slakeio_log(char *str);
+// a fuction that checks weather a position is inside a givin rect 
+// returns true if it's inside
+int in_rect(struct slake_map_t *rect, struct slake_position_t *pos);
+
+
+
+
 
 

@@ -4,7 +4,11 @@
 
 #include "slakeio.h"
 #include <termbox.h>
+#include <stdlib.h>
 #include <stdio.h>
+
+void game_init(void) {
+	
 
 void key_control(uint16_t key)
 {
@@ -20,6 +24,17 @@ void key_control(uint16_t key)
 	if(key == TB_KEY_ARROW_RIGHT) { my_slake->mode =right; }
 	if(key == TB_KEY_ARROW_DOWN) { my_slake->mode =down; }
 	
+}
+
+
+
+int in_rect(struct slake_map_t *rect, struct slake_position_t *pos) {
+	if ((pos->x > rect->upper_left->x) && 
+		(pos->y > rect->upper_left->y) &&
+		(pos->x < rect->bottom_right->x) &&
+		(pos->y < rect->bottom_right->y))
+	return 1;
+	return 0;
 }
 
 
