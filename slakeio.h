@@ -37,12 +37,12 @@ struct slake_position_t {
 };
 
 //food
-/*struct food_position_t {
-	int x;
-	int y;
-};*/
-struct slake_position_t check_food(struct slake_t slake);
-
+//--functions
+//---checks if slake ate food
+int check_food(struct slake_t *slake);
+//---replaces used food-koordination with new one
+void replace_food(int index_used_food);
+//--food array
 struct slake_position_t *food;
 
 // slake functions
