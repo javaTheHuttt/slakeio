@@ -37,7 +37,7 @@ void end_log(int print)     // print output?
 }
 
 
-void write_log(const char *format, ...)   // adds \n at the end
+void write_log(const char *format, ...)
 {
 	// time prefix 
 	char buf[9];
@@ -50,6 +50,4 @@ void write_log(const char *format, ...)   // adds \n at the end
 	va_start(args, format);
 	vfprintf(slake_log, format, args);
 	va_end(args);
-	
-	fprintf(slake_log, "\n");
 }

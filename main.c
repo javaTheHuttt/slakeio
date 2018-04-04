@@ -14,8 +14,6 @@ int main(int argc, char *argv []) {
     
 
 	//main loop
-	write_log("Call tb_init\n");
-	tb_init();
 	write_log("Call game_init\n");
 	game_init();
 	// -------- Test Slake --------
