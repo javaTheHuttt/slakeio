@@ -115,6 +115,9 @@ void slakeio_log(char *str);
 int in_rect(struct slake_map_t *rect, struct slake_position_t *pos);
 
 
-// log file
-FILE *slake_log;
+// logs
+void init_log(void);				// inits log file
+void write_log(const char *format, ...);	// formated log
+void end_log(int print); // closes log file, print log after close 
+
 
