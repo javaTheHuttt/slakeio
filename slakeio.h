@@ -29,6 +29,14 @@ struct slake_position_t {
 	int y;
 };
 
+//food
+void checkfood(slake_position_t *head);
+struct food_position_t {
+	int x;
+	int y;
+};
+struct food_position_t *food;
+
 // slake functions
 
 

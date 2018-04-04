@@ -44,3 +44,5 @@ void slakeio_log(char *str) {
 	fprintf(handle, "\n");
 	fclose(handle);
 }
+
+
