@@ -4,6 +4,11 @@
 // LOGIC DECLARATIONS
 //
 
+//map const
+#define MAP_SIZE_X  1000
+#define MAP_SIZE_Y  1000
+
+
 enum slake_mode_t {left, up, right, down};
 
 struct slake_t {
@@ -31,12 +36,13 @@ struct slake_position_t {
 };
 
 //food
-void checkfood(slake_position_t *head);
-struct food_position_t {
+/*struct food_position_t {
 	int x;
 	int y;
-};
-struct food_position_t *food;
+};*/
+struct slake_position_t check_food(struct slake_position_t *head);
+
+struct slake_position_t *food;
 
 // slake functions
 
