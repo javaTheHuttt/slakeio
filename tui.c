@@ -82,8 +82,11 @@ void show_coordinates(int x, int y) {
 
 
 void draw(void) {
+	// ################## DRAW SLAKES #########################
 	struct slake_map_t *screen = get_screen();
 	// go with s through all slakes
+
+	
 	int x;
 	int y;
 	
@@ -102,8 +105,18 @@ void draw(void) {
 	
 		}
 	}
+	// ################ SHOW COORDINATES ######################
 	show_coordinates(my_slake->cells[0].x, my_slake->cells[0].y);
-	/*if ((! in_rect(map, screen->upper_left))) {
+
+
+
+	// ####################### DRAW FOOD ########################
+	
+	
+
+
+	// ################# DRAW MAP BORDERS #####################
+	if ((! in_rect(map, screen->upper_left))) {
 		for(int x = 0;x <= (screen->upper_left->x - map->upper_left->x); x++) {
 			for(int y = 0; y <= (screen->upper_left->y - map->upper_left->y); y++) {
 				tb_put_cell(x, y, &map_border);
@@ -116,7 +129,7 @@ void draw(void) {
 				tb_put_cell(x, y, &map_border);
 			}
 		}
-	}*/
+	}
 	
 	tb_present();	
 

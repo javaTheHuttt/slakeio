@@ -55,7 +55,7 @@ void game_init(void) {
 	pos2->x = 1000;
 	pos2->y = 1000;
 	
-	struct slake_map_t *map = malloc(sizeof(struct slake_map_t));
+	map = malloc(sizeof(struct slake_map_t));
 	map->upper_left = pos1;
 	map->bottom_right = pos2;
 

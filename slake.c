@@ -13,7 +13,7 @@ void slake_move(struct slake_t *slake)
 	enum slake_mode_t mode = slake->mode;
 	
 	// expected distance since last move
-	double delta_distance = slake->speed * slake->lastmove_clock / 1000;
+	double delta_distance = slake->speed * slake->lastmove_clock / 10000;
 	
 	// storage management
 	slake->cells = realloc(slake->cells, sizeof(struct slake_position_t) * slake->length);
@@ -45,12 +45,22 @@ void slake_move(struct slake_t *slake)
 	// update clock after move
 	slake->lastmove_clock = clock();
 
-	/*if (!(in_rect(map, &(slake->cells[0])))) {
+	write_log("%p\n", slake);
+	if (!in_rect(map, &slake->cells[0])) {
 		slake->head_x = old_head_x;
 		slake->head_y = old_head_y;
-		slake->mode += 1;
+
+		y_diff = 0;
+		x_diff = 0;
+
+		if (mode == up || mode == down) {
+			slake->mode = left;
+		}
+		else {
+			slake->mode = down;
+		}
 		return;
-	};*/
+	};
 
 	int head_delta_distance_x = (int)(round(old_head_x)-round(slake->head_x));
 	int head_delta_distance_y = (int)(round(old_head_y)-round(slake->head_y));
