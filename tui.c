@@ -39,7 +39,7 @@ void init_tui(void) {
 }
 
 struct slake_map_t *get_screen(void) {
-	 fprintf(slake_log, "Slake Position\n x: %d\n y: %d\n", my_slake->cells[0].x, my_slake->cells[0].y);
+	 write_log("Slake Position\n x: %d\n y: %d\n", my_slake->cells[0].x, my_slake->cells[0].y);
 	//screen center shoudl be the position of the head of the slake
 	struct slake_position_t *screen_center = &(my_slake->cells[0]);
 	struct slake_position_t *screencorner_upper_left = 
@@ -63,6 +63,22 @@ struct slake_map_t *get_screen(void) {
 	return screen;
 }
 
+void show_coordinates(int x, int y) {
+	char *str = malloc(sizeof(char) *20);
+	int len = 14;
+	sprintf(str, "x: %d, y: %d", x, y);
+	static struct tb_cell text =
+		{
+			.fg = TB_BOLD,
+			.bg = TB_WHITE,
+		};
+	for(int i = 0; i < len; i++) {
+		text.ch = str[i];
+		tb_put_cell(i, 0, &text);
+	}
+	
+}
+
 
 
 void draw(void) {
@@ -71,7 +87,7 @@ void draw(void) {
 	int x;
 	int y;
 	
-	fprintf(slake_log, "Screen Position\n upper_left:\n  x: %d\n  y: %d\n\n bottom_right: \n  x: %d\n  y: %d\n", screen->upper_left->x, screen->upper_left->y, screen->bottom_right->x, screen->bottom_right->y);
+	write_log("Screen Position\n upper_left:\n  x: %d\n  y: %d\n\n bottom_right: \n  x: %d\n  y: %d\n", screen->upper_left->x, screen->upper_left->y, screen->bottom_right->x, screen->bottom_right->y);
 
 	tb_clear();
 	for(int s = 0; s < all_slakes->length; s++) {
@@ -86,6 +102,7 @@ void draw(void) {
 	
 		}
 	}
+	show_coordinates(my_slake->cells[0].x, my_slake->cells[0].y);
 	/*if ((! in_rect(map, screen->upper_left))) {
 		for(int x = 0;x <= (screen->upper_left->x - map->upper_left->x); x++) {
 			for(int y = 0; y <= (screen->upper_left->y - map->upper_left->y); y++) {

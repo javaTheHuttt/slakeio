@@ -102,6 +102,7 @@ int tbh;
 
 void draw(void);
 
+void init_tui(void);
 //
 // CONTROL DECLARATIONS
 //
