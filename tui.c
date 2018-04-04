@@ -39,7 +39,7 @@ void init_tui(void) {
 }
 
 struct slake_map_t *get_screen(void) {
-	 fprintf(slake_log, "Slake Position\n x: %d\n y: %d\n", my_slake->cells[0].x, my_slake->cells[0].y);
+	 write_log("Slake Position\n x: %d\n y: %d\n", my_slake->cells[0].x, my_slake->cells[0].y);
 	//screen center shoudl be the position of the head of the slake
 	struct slake_position_t *screen_center = &(my_slake->cells[0]);
 	struct slake_position_t *screencorner_upper_left = 
@@ -87,7 +87,7 @@ void draw(void) {
 	int x;
 	int y;
 	
-	fprintf(slake_log, "Screen Position\n upper_left:\n  x: %d\n  y: %d\n\n bottom_right: \n  x: %d\n  y: %d\n", screen->upper_left->x, screen->upper_left->y, screen->bottom_right->x, screen->bottom_right->y);
+	write_log("Screen Position\n upper_left:\n  x: %d\n  y: %d\n\n bottom_right: \n  x: %d\n  y: %d\n", screen->upper_left->x, screen->upper_left->y, screen->bottom_right->x, screen->bottom_right->y);
 
 	tb_clear();
 	for(int s = 0; s < all_slakes->length; s++) {
