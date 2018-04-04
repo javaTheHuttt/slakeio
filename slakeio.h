@@ -97,5 +97,4 @@ void key_control(uint16_t key);
 int in_rect(struct slake_map_t *rect, struct slake_position_t *pos);
 
 // log file
-FILE *log;
-
+FILE *slake_log;
