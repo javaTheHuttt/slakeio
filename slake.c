@@ -13,7 +13,7 @@ void slake_move(struct slake_t *slake)
 	enum slake_mode_t mode = slake->mode;
 	
 	// expected distance since last move
-	double delta_distance = slake->speed * slake->lastmove_clock / 10000;
+	double delta_distance = slake->speed * (clock() - slake->lastmove_clock) / 10000;
 	
 	// storage management
 	if (slake->old_length != slake->length) {
@@ -27,6 +27,12 @@ void slake_move(struct slake_t *slake)
 	int x_diff = 0;
 	int y_diff = 0;
 	
+	// check if head will be outside map 
+	if (!in_rect(map, &slake->cells[0])) {
+		// TODO: Kill slake :(
+		return;
+	}
+
 	// new head positions
 	if(mode == left) {
 		slake->head_x -= delta_distance;
@@ -45,22 +51,6 @@ void slake_move(struct slake_t *slake)
 		y_diff = 1;
 	}
 	
-	if (!in_rect(map, &slake->cells[0])) {
-		slake->head_x = old_head_x;
-		slake->head_y = old_head_y;
-
-		y_diff = 0;
-		x_diff = 0;
-
-		if (mode == up || mode == down) {
-			slake->mode = left;
-		}
-		else {
-			slake->mode = down;
-		}
-		//TODO update clock
-		return;
-	}
 
 	int head_delta_distance_x = abs((int) (round(old_head_x)-round(slake->head_x)));
 	int head_delta_distance_y = abs((int) (round(old_head_y)-round(slake->head_y)));
@@ -68,7 +58,6 @@ void slake_move(struct slake_t *slake)
 	for (int i = 0; i <= head_delta_distance_x + head_delta_distance_y; i++) {
 		
 		// move head
-		//TODO ??? IN FIRST FOR LOOP ???
 		slake->cells[0].x += x_diff;
 		slake->cells[0].y += y_diff;
 	
@@ -76,7 +65,7 @@ void slake_move(struct slake_t *slake)
 		// move slake tail  		
 		for (int i = (slake->length - 1); i > 0; i--) {
 			write_log("	Cell %d:\n", i);
-			slake->cells[i] = slake->cells[i-1];	//TODO: i oder i-1?
+			slake->cells[i] = slake->cells[i-1];	
 			write_log("		x: %d\n", slake->cells[i].x);
 			write_log("		y: %d\n", slake->cells[i].y);
 		}
