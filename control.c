@@ -15,20 +15,38 @@ void init_food(void)
 	
 	for(int i = 0; i<300; i++)
 	{
-		struct slake_position_t food_cell = { .x = rand() % 1000, .y = rand() % 1000 };
-		food[i] = food_cell;
+		struct slake_position_t big_food_cell = { .x = rand() % 1000, .y = rand() % 1000 };
+		big_food[i] = big_food_cell;
+	}
+
+	for(int i = 0; i<400; i++)
+	{
+		struct slake_position_t small_food_cell = { .x = rand() % 1000, .y = rand() % 1000 };
+		small_food[i] = small_food_cell;
 	}
 }
 
 //checks if slake ate food
 int check_food(struct slake_t *slake)
 {
+	//checks big_food
 	for(int i = 0; i<300; i++)
 	{
-		if(slake->cells[0].x == food[i].x && slake->cells[0].y == food[i].y)
+		if(slake->cells[0].x == big_food[i].x && slake->cells[0].y == big_food[i].y)
+		{
+			slake->length+=3;
+			return i; //slake ate food 
+		
+			break;
+		}
+	}
+	//checks small_food
+	for(int j = 0; j<400; j++)
+	{
+		if(slake->cells[0].x == small_food[j].x && slake->cells[0].y == small_food[j].y)
 		{
 			slake->length++;
-			return i; //slake ate food 
+			return j; //slake ate food 
 		
 			break;
 		}
@@ -42,8 +60,8 @@ void replace_food(int place)
 {
 	if(place>=0)
 	{
-		food[place].x = rand() % 1000;
-		food[place].y = rand() % 1000;
+		big_food[place].x = rand() % 1000;
+		big_food[place].y = rand() % 1000;
 	}
 }
 
@@ -65,7 +83,8 @@ void game_init(void) {
 
 	//initialize food
 	srand(time(NULL));	
-	food = malloc(sizeof(struct slake_position_t)*300);
+	big_food = malloc(sizeof(struct slake_position_t)*300);
+	small_food = malloc(sizeof(struct slake_position_t)*400);
 	init_food();
 
 	init_tui();

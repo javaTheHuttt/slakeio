@@ -47,7 +47,7 @@ int check_food(struct slake_t *slake);
 //---replaces used food-koordination with new one
 void replace_food(int index_used_food);
 //-food array
-struct slake_position_t *food;
+struct slake_position_t *big_food;
 
 // slake functions
 
