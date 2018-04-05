@@ -9,6 +9,9 @@
 #define MAP_SIZE_X  1000
 #define MAP_SIZE_Y  1000
 
+//
+#define AMOUNT_SMALL_FOOD 400
+#define AMOUNT_BIG_FOOD   300
 
 enum slake_mode_t {left, up, right, down};
 
@@ -43,7 +46,8 @@ struct slake_position_t {
 };*/
 struct slake_position_t check_food(struct slake_t slake);
 
-struct slake_position_t *food;
+struct slake_position_t *big_food;
+struct slake_position_t *big_food;
 
 // slake functions
 
