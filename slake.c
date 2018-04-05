@@ -16,7 +16,10 @@ void slake_move(struct slake_t *slake)
 	double delta_distance = slake->speed * slake->lastmove_clock / 10000;
 	
 	// storage management
-	slake->cells = realloc(slake->cells, sizeof(struct slake_position_t) * slake->length);
+	if (slake->old_length != slake->length) {
+		slake->cells = realloc(slake->cells, sizeof(struct slake_position_t) * slake->length);
+		slake->old_length = slake->length;
+	}
 
 	double old_head_x = slake->head_x;
 	double old_head_y = slake->head_y;
@@ -42,10 +45,6 @@ void slake_move(struct slake_t *slake)
 		y_diff = 1;
 	}
 	
-	// update clock after move
-	slake->lastmove_clock = clock();
-
-	write_log("%p\n", slake);
 	if (!in_rect(map, &slake->cells[0])) {
 		slake->head_x = old_head_x;
 		slake->head_y = old_head_y;
@@ -59,22 +58,33 @@ void slake_move(struct slake_t *slake)
 		else {
 			slake->mode = down;
 		}
+		//TODO update clock
 		return;
-	};
+	}
 
-	int head_delta_distance_x = (int)(round(old_head_x)-round(slake->head_x));
-	int head_delta_distance_y = (int)(round(old_head_y)-round(slake->head_y));
-	for (int i = 0; i < abs(head_delta_distance_x) + abs(head_delta_distance_y); i++) {
+	int head_delta_distance_x = abs((int) (round(old_head_x)-round(slake->head_x)));
+	int head_delta_distance_y = abs((int) (round(old_head_y)-round(slake->head_y)));
 		
-		// move slake tail  
-		for (int i = 1; i < slake->length; ++i) {
-			slake->cells[i] = slake->cells[i-1];
-		}
-
+	for (int i = 0; i <= head_delta_distance_x + head_delta_distance_y; i++) {
+		
 		// move head
+		//TODO ??? IN FIRST FOR LOOP ???
 		slake->cells[0].x += x_diff;
 		slake->cells[0].y += y_diff;
+	
+		write_log("Tail position: \n");
+		// move slake tail  		
+		for (int i = (slake->length - 1); i > 0; i--) {
+			write_log("	Cell %d:\n", i);
+			slake->cells[i] = slake->cells[i-1];	//TODO: i oder i-1?
+			write_log("		x: %d\n", slake->cells[i].x);
+			write_log("		y: %d\n", slake->cells[i].y);
+		}
+		write_log("\n");
 	}
+	
+	// update clock after move
+	slake->lastmove_clock = clock();
 }
 
 
@@ -85,20 +95,28 @@ struct slake_t *slake_init(struct slake_t *slake, double head_x, double head_y,
 	// from arguments
 	slake->head_x = head_x;
 	slake->head_y = head_y;
+
 	slake->length = length;
+	slake->old_length = length;
+
 	slake->mode = mode;
 	slake->speed = speed;
-	slake->lastmove_clock = clock();
 	
 	// position
 	slake->cells = malloc(sizeof(struct slake_position_t) * length);
 	
+	write_log("Generate slake: \n");
 	struct slake_position_t temp_position;
 	for (int i = 0; i < length; i++) {
+		write_log("     Cell %d:\n", i);
 		temp_position.x = (int) head_x;
 		temp_position.y = (int) head_y - i; 
 		slake->cells[i] = temp_position;
+		write_log("             x: %d\n", slake->cells[i].x);
+ 		write_log("             y: %d\n", slake->cells[i].y);
 	} 
+	
+	slake->lastmove_clock = clock();
 	
 	return slake;
 

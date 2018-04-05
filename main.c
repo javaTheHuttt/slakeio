@@ -14,8 +14,6 @@ int main(int argc, char *argv []) {
     
 
 	//main loop
-	write_log("Call tb_init\n");
-	tb_init();
 	write_log("Call game_init\n");
 	game_init();
 	// -------- Test Slake --------
@@ -23,7 +21,7 @@ int main(int argc, char *argv []) {
 	all_slakes = malloc(sizeof(struct slake_array_t));
 	all_slakes->array = malloc(sizeof(struct slake_t) * 1);
 	all_slakes->length = 1;
-	my_slake = slake_init(&all_slakes->array[0], (double)(MAP_SIZE_X / 2), (double)(MAP_SIZE_Y / 2), 5, up, 1);
+	my_slake = slake_init(&all_slakes->array[0], (double)(MAP_SIZE_X / 2), (double)(MAP_SIZE_Y / 2), 5, up, 0.1);
 	
     	write_log("Start main loop\n");
 	int loop = 1;
@@ -44,7 +42,9 @@ int main(int argc, char *argv []) {
 		for (int i = 0; i < all_slakes->length; i++) {
 			// move slake 
 			slake_move(all_slakes->array);
-			
+			//checks slake ate and replaces 
+			int ate_food = check_food(my_slake);
+			replace_food(ate_food);
 			// TODO: Check for food
 		} 
 		draw();

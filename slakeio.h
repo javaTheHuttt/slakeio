@@ -22,6 +22,7 @@ struct slake_t {
 	enum slake_mode_t mode;
 	// score or length of slake
 	int length;
+	int old_length;
 
 	//lastmove_time
 	double lastmove_clock;
@@ -40,14 +41,20 @@ struct slake_position_t {
 };
 
 //food
-/*struct food_position_t {
-	int x;
-	int y;
-};*/
-struct slake_position_t check_food(struct slake_t slake);
 
+
+//
+//-functions
+//--- init random food-coordinates and puts them in array food
+void init_food(void);
+//---checks if slake ate food
+int check_food(struct slake_t *slake);
+//---replaces used food-koordination with new one
+void replace_food(int index_used_food);
+//-food array
 struct slake_position_t *big_food;
 struct slake_position_t *big_food;
+
 
 // slake functions
 

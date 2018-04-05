@@ -9,50 +9,43 @@
 #include <time.h>
 #include <math.h>
 
-void rand_food_pos(void)
+//init 300 random food-coordinates
+void init_food(void)
 {
 	
 	for(int i = 0; i<300; i++)
 	{
-		food[i].x = rand() % 1000;
-		food[i].y = rand() % 1000;
+		struct slake_position_t food_cell = { .x = rand() % 1000, .y = rand() % 1000 };
+		food[i] = food_cell;
 	}
 }
 
-struct slake_position_t check_food(struct slake_t slake)
+//checks if slake ate food
+int check_food(struct slake_t *slake)
 {
 	for(int i = 0; i<300; i++)
 	{
-		if( (round(slake.head_x)) == food[i].x && (round(slake.head_y)) == food[i].y)
+		if(slake->cells[0].x == food[i].x && slake->cells[0].y == food[i].y)
 		{
-			return food[i]; //slake ate food 
+			return i; //slake ate food 
 			//TODO slake grows
 			break;
 		}
 	}
-	struct slake_position_t end;
-	end.x = MAP_SIZE_X;
-	end.y = MAP_SIZE_Y;
-	return end; //slake isst nichts -> MAP_END returnt
+	return (-1); //slake ate nothing
 
 }
 
-void init_food(void)
+//if slake ate food this functions creats new food-coordinate
+void replace_food(int place)
 {
-	for(int i = 0; i<300; i++)
+	if(place>=0)
 	{
-		tb_change_cell('+', TB_RED, TB_DEFAULT, food[i].x, food[i].y);
+		food[place].x = rand() % 1000;
+		food[place].y = rand() % 1000;
 	}
 }
 
-void check_food_amount(struct slake_position_t food)
-{
-	if(food.x != MAP_SIZE_X || food.y != MAP_SIZE_Y)
-	{
-		food.x = rand() % 1000;
-		food.y = rand() % 1000;
-	}
-}
 
 void game_init(void) {
 	//initialize map
@@ -69,24 +62,26 @@ void game_init(void) {
 	map->upper_left = pos1;
 	map->bottom_right = pos2;
 
-	//food
+	//initialize food
 	srand(time(NULL));	
 	food = malloc(sizeof(struct slake_position_t)*300);
-	rand_food_pos();
-	check_food_amount(check_food(*my_slake));	
+	init_food();
+
 	init_tui();
 
 
 }
+
+//handles key-input
 void key_control(uint16_t key)
 {
  	enum slake_mode_t old_mode = my_slake->mode; //mode right before a change
-	// 	checks that modechange is possible
+	// checks if mode-change is possible
 	if((old_mode == left && key == TB_KEY_ARROW_RIGHT) || (old_mode == left && key == TB_KEY_ARROW_LEFT)){goto end;}
  	if((old_mode == right && key == TB_KEY_ARROW_LEFT) || (old_mode == right && key == TB_KEY_ARROW_RIGHT)){goto end;}
 	if((old_mode == up && key == TB_KEY_ARROW_DOWN) || (old_mode == up && key == TB_KEY_ARROW_UP)){goto end;}
 	if((old_mode == down && key == TB_KEY_ARROW_UP) || (old_mode == down && key == TB_KEY_ARROW_DOWN)){goto end;}
-	//	changes mode
+	// changes mode
 	if(key == TB_KEY_ARROW_LEFT) { my_slake->mode =left; }	
 	if(key == TB_KEY_ARROW_UP) { my_slake->mode =up; }
 	if(key == TB_KEY_ARROW_RIGHT) { my_slake->mode =right; }

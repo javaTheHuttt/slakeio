@@ -22,13 +22,21 @@ static const struct tb_cell enemy_player =
 	.fg = TB_DEFAULT,
 	.bg = TB_RED,
 };
+
+
+static const struct tb_cell tb_food =
+{
+	.ch = '#',
+	.fg = TB_BOLD,
+	.bg = TB_BLUE,
+};
+
 static const struct tb_cell map_border =
 {
 	.ch = '#',
 	.fg = TB_BOLD,
 	.bg = TB_WHITE,
 };
-
 
 void init_tui(void) {
 	int tbe = tb_init();
@@ -39,7 +47,7 @@ void init_tui(void) {
 }
 
 struct slake_map_t *get_screen(void) {
-	 write_log("Slake Position\n x: %d\n y: %d\n", my_slake->cells[0].x, my_slake->cells[0].y);
+	// write_log("Slake Position\n x: %d\n y: %d\n", my_slake->cells[0].x, my_slake->cells[0].y);
 	//screen center shoudl be the position of the head of the slake
 	struct slake_position_t *screen_center = &(my_slake->cells[0]);
 	struct slake_position_t *screencorner_upper_left = 
@@ -90,7 +98,7 @@ void draw(void) {
 	int x;
 	int y;
 	
-	write_log("Screen Position\n upper_left:\n  x: %d\n  y: %d\n\n bottom_right: \n  x: %d\n  y: %d\n", screen->upper_left->x, screen->upper_left->y, screen->bottom_right->x, screen->bottom_right->y);
+	//write_log("Screen Position\n upper_left:\n  x: %d\n  y: %d\n\n bottom_right: \n  x: %d\n  y: %d\n", screen->upper_left->x, screen->upper_left->y, screen->bottom_right->x, screen->bottom_right->y);
 
 	tb_clear();
 	for(int s = 0; s < all_slakes->length; s++) {
@@ -113,7 +121,13 @@ void draw(void) {
 	// ####################### DRAW FOOD ########################
 	
 	
-
+	for (int i = 0;i<300;i++) {
+		if(in_rect(screen, &food[i])) {
+			x = food[i].x - screen->upper_left->x;
+			y = food[i].y - screen->upper_left->y;
+			tb_put_cell(x, y, &tb_food);
+		}
+	};
 
 	// ################# DRAW MAP BORDERS #####################
 	if ((! in_rect(map, screen->upper_left))) {
