@@ -13,15 +13,15 @@
 void init_food(void)
 {
 	
-	for(int i = 0; i<300; i++)
+	for(int i = 0; i<AMOUNT_BIG_FOOD; i++)
 	{
-		struct slake_position_t big_food_cell = { .x = rand() % 1000, .y = rand() % 1000 };
+		struct slake_position_t big_food_cell = { .x = rand() % MAP_SIZE_X, .y = rand() % MAP_SIZE_Y };
 		big_food[i] = big_food_cell;
 	}
 
-	for(int i = 0; i<400; i++)
+	for(int i = 0; i<AMOUNT_SMALL_FOOD; i++)
 	{
-		struct slake_position_t small_food_cell = { .x = rand() % 1000, .y = rand() % 1000 };
+		struct slake_position_t small_food_cell = { .x = rand() % MAP_SIZE_X, .y = rand() % MAP_SIZE_Y };
 		small_food[i] = small_food_cell;
 	}
 }
@@ -30,7 +30,7 @@ void init_food(void)
 int check_food(struct slake_t *slake)
 {
 	//checks big_food
-	for(int i = 0; i<300; i++)
+	for(int i = 0; i< AMOUNT_BIG_FOOD; i++)
 	{
 		if(slake->cells[0].x == big_food[i].x && slake->cells[0].y == big_food[i].y)
 		{
@@ -41,7 +41,7 @@ int check_food(struct slake_t *slake)
 		}
 	}
 	//checks small_food
-	for(int j = 0; j<400; j++)
+	for(int j = 0; j<AMOUNT_SMALL_FOOD; j++)
 	{
 		if(slake->cells[0].x == small_food[j].x && slake->cells[0].y == small_food[j].y)
 		{
@@ -60,13 +60,13 @@ void replace_food(int place)
 {
 	if(/*place>=0 &&*/ my_slake->length-my_slake->old_length>1)
 	{
-		big_food[place].x = rand() % 1000;
-		big_food[place].y = rand() % 1000;
+		big_food[place].x = rand() % MAP_SIZE_X;
+		big_food[place].y = rand() % MAP_SIZE_Y;
 	}
 	else if(place>=0)
 	{
-		small_food[place].x = rand() % 1000;
-		small_food[place].y = rand() % 1000;
+		small_food[place].x = rand() % MAP_SIZE_X;
+		small_food[place].y = rand() % MAP_SIZE_Y;
 	}
 }
 
@@ -79,8 +79,8 @@ void game_init(void) {
 	struct slake_position_t *pos2 = malloc(sizeof(struct slake_position_t)); 
 
 	//size of the map
-	pos2->x = 1000;
-	pos2->y = 1000;
+	pos2->x = MAP_SIZE_X;
+	pos2->y = MAP_SIZE_Y;
 	
 	map = malloc(sizeof(struct slake_map_t));
 	map->upper_left = pos1;
@@ -88,8 +88,8 @@ void game_init(void) {
 
 	//initialize food
 	srand(time(NULL));	
-	big_food = malloc(sizeof(struct slake_position_t)*300);
-	small_food = malloc(sizeof(struct slake_position_t)*400);
+	big_food = malloc(sizeof(struct slake_position_t)*AMOUNT_BIG_FOOD);
+	small_food = malloc(sizeof(struct slake_position_t)*AMOUNT_SMALL_FOOD);
 	init_food();
 
 	init_tui();
