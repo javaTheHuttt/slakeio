@@ -79,9 +79,9 @@ struct slake_map_t *get_screen(void) {
 }
 
 void show_coordinates(int x, int y) {
-	char *str = malloc(sizeof(char) *20);
-	int len = 14;
-	sprintf(str, "x: %d, y: %d", x, y);
+	char *str = malloc(sizeof(char) *40);
+	int len = 32;
+	sprintf(str, "x: %d, y: %d        Score: %d", x, y, my_slake->length);
 	static struct tb_cell text =
 		{
 			.fg = TB_BOLD,
