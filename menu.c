@@ -122,7 +122,8 @@ void win(void)
 	put_menu_header(win, TB_GREEN,win_begin, win_height);
 	put_menu_option(score, TB_GREEN, score_begin, win_height+8);
 	put_menu_option(instruction2, TB_BLUE,win_begin, win_height+11);
-	put_menu_option(instruction3, TB_BLUE,win_begin, win_height+13);	
+	put_menu_option(instruction3, TB_BLUE,win_begin, win_height+13);
+	tb_present();	
 	while(1)
 	{
 		struct tb_event input;
@@ -132,7 +133,10 @@ void win(void)
 				loop=0;
 				return;
 			case TB_KEY_ENTER:
-				main();
+				game_uninit();
+				game_init();
+				status = playing_status;
+				return;
 		}
 	}
 }
@@ -163,7 +167,7 @@ void lost(void)
 	put_menu_option(score, TB_GREEN, score_begin, lost_height+8);
 	put_menu_option(instruction2, TB_BLUE,lost_begin, lost_height+11);
 	put_menu_option(instruction3, TB_BLUE,lost_begin, lost_height+13);	
-	
+	tb_present();	
 
 	while(1)
 	{
@@ -174,7 +178,10 @@ void lost(void)
 				loop=0;
 				return;
 			case TB_KEY_ENTER:
-				main();
+				game_uninit();
+				game_init();
+				status = playing_status;
+				return;	
 		}
 	}
 }

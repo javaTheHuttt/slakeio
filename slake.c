@@ -34,19 +34,34 @@ void slake_move(struct slake_t *slake)
 	// check if head will be outside map 
 	if (!in_rect(map, &slake->cells[0])) {
 		status = lost_status;
-		return;
 	}
 	// check if inside other snake
-	for(int s = 0; s < all_slakes->length; s++) {
-		// go with c through all cells of the slake
-		for (int c = 0; c < (all_slakes->array[s]).length; c++) {
-			if (slake->cells[0].x == all_slakes->array[s].cells[c].x &&
-				slake->cells[0].x == all_slakes->array[s].cells[c].x) {
-				status = lost_status;
-				return;
-			}
+//	for(int s = 0; s < all_slakes->length; s++) {
+//		// go with c through all cells of the slake
+//		int start_index = 0;
+//		if(&all_slakes->array[s] == slake) {
+//			start_index = 1;
+//		}
+//		for (int c = start_index; c < (all_slakes->array[s]).length; c++) {
+//			if (slake->cells[0].x == all_slakes->array[s].cells[c].x &&
+//				slake->cells[0].x == all_slakes->array[s].cells[c].x) {
+//				status = lost_status;
+//				return;
+//			}
+//		}
+//	}
+
+
+	for(int i = 2; i<my_slake->length; i++)
+	{
+		if(my_slake->cells[0].x == my_slake->cells[i].x && my_slake->cells[0].y == my_slake->cells[i].y)
+		{
+			status = lost_status;
+			write_log("Slake got killed at x=%d, y=%d\n", my_slake->cells[0].x, my_slake->cells[0].y);
+			return;
 		}
 	}
+
 
 	// new head positions
 	if(mode == left) {
@@ -115,7 +130,7 @@ struct slake_t *slake_init(struct slake_t *slake, double head_x, double head_y,
 	for (int i = 0; i < length; i++) {
 		write_log("     Cell %d:\n", i);
 		temp_position.x = (int) head_x;
-		temp_position.y = (int) head_y - i; 
+		temp_position.y = (int) head_y + i; 
 		slake->cells[i] = temp_position;
 		write_log("             x: %d\n", slake->cells[i].x);
  		write_log("             y: %d\n", slake->cells[i].y);

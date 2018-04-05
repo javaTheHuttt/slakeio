@@ -81,7 +81,6 @@ void game_init(void);
 
 //*****GAMESTATUS*****
 enum gamestatus {
-	startmenu_status,
 	playing_status,
 	win_status,
 	lost_status};
@@ -96,6 +95,7 @@ void put_menu_header(char *header,uint16_t style, int x, int y);
 void put_menu_option(char *option,uint16_t style, int x, int y);
 void put_background(int start_x, int start_y, int end_x, int end_y);
 
+void game_uninit(void);
 
 
 

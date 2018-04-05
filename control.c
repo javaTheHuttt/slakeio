@@ -86,6 +86,13 @@ void game_init(void) {
 	map = malloc(sizeof(struct slake_map_t));
 	map->upper_left = pos1;
 	map->bottom_right = pos2;
+	//init slakes
+
+	write_log("Init test slake\n");
+	all_slakes = malloc(sizeof(struct slake_array_t)*1);
+	all_slakes->array = malloc(sizeof(struct slake_t)*1);
+	all_slakes->length = 1;
+	my_slake = slake_init(&all_slakes->array[0], (double)(MAP_SIZE_X / 2), (double)(MAP_SIZE_Y /2),5, up, 10);
 
 	//initialize food
 	srand(time(NULL));	
@@ -93,7 +100,6 @@ void game_init(void) {
 	small_food = malloc(sizeof(struct slake_position_t)*AMOUNT_SMALL_FOOD);
 	init_food();
 
-	init_tui();
 
 
 }

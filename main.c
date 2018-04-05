@@ -10,26 +10,13 @@ int main(int argc, char *argv []) {
     
 	// init log
 	init_log();
-    
-    
-
-	//main loop
-	write_log("Call game_init\n");
 	game_init();
-	status = startmenu_status;
-	// -------- Test Slake --------
-	write_log( "Init test slake\n");
-	all_slakes = malloc(sizeof(struct slake_array_t));
-	all_slakes->array = malloc(sizeof(struct slake_t) * 1);
-	all_slakes->length = 1;
-	my_slake = slake_init(&all_slakes->array[0], (double)(MAP_SIZE_X / 2), (double)(MAP_SIZE_Y / 2), 5, up, 10);
-	
+	init_tui();	
     	write_log("Start main loop\n");
 	loop = 1;
-	
+	startmenu();	
 	while(loop) {
-		if(status == startmenu_status) { startmenu(); }
-		else if(status == win_status) { win(); }
+		if(status == win_status) { win(); }
 		else if(status == lost_status) { lost(); }
 		else if(status == playing_status)
 			{
@@ -66,3 +53,8 @@ int main(int argc, char *argv []) {
 	return 0;
 }
 
+
+void game_uninit(void) {
+	free(all_slakes->array);
+	free(all_slakes);
+}
