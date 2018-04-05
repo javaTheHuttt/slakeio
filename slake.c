@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <time.h>
 #include <math.h>
 
 #include "slakeio.h"
@@ -11,9 +10,14 @@ void slake_move(struct slake_t *slake)
 	
 	// current slake mode
 	enum slake_mode_t mode = slake->mode;
+
+	double current_time = get_time();
 	
 	// expected distance since last move
-	double delta_distance = slake->speed * (clock() - slake->lastmove_clock) / 10000;
+	double delta_distance = slake->speed * (current_time - slake->lastmove_clock);
+
+	// update clock after move
+	slake->lastmove_clock = current_time;
 	
 	// storage management
 	if (slake->old_length != slake->length) {
@@ -31,6 +35,17 @@ void slake_move(struct slake_t *slake)
 	if (!in_rect(map, &slake->cells[0])) {
 		status = lost_status;
 		return;
+	}
+	// check if inside other snake
+	for(int s = 0; s < all_slakes->length; s++) {
+		// go with c through all cells of the slake
+		for (int c = 0; c < (all_slakes->array[s]).length; c++) {
+			if (slake->cells[0].x == all_slakes->array[s]).cells[c].x &&
+				slake->cells[0].x == all_slakes->array[s]).cells[c].x) {
+				gamestatus = lost;
+				return;
+			}
+		}
 	}
 
 	// new head positions
@@ -54,8 +69,12 @@ void slake_move(struct slake_t *slake)
 
 	int head_delta_distance_x = abs((int) (round(old_head_x)-round(slake->head_x)));
 	int head_delta_distance_y = abs((int) (round(old_head_y)-round(slake->head_y)));
+	
+	write_log("%f %f %f\n", delta_distance, old_head_x, slake->head_x);
+	write_log("Delta distance x: %d\n", head_delta_distance_x);		
+	write_log("Delta distance y: %d\n", head_delta_distance_y);
 		
-	for (int i = 0; i <= head_delta_distance_x + head_delta_distance_y; i++) {
+	for (int i = 0; i < head_delta_distance_x + head_delta_distance_y; i++) {
 		
 		// move head
 		slake->cells[0].x += x_diff;
@@ -71,9 +90,6 @@ void slake_move(struct slake_t *slake)
 		}
 		write_log("\n");
 	}
-	
-	// update clock after move
-	slake->lastmove_clock = clock();
 }
 
 
@@ -105,7 +121,7 @@ struct slake_t *slake_init(struct slake_t *slake, double head_x, double head_y,
  		write_log("             y: %d\n", slake->cells[i].y);
 	} 
 	
-	slake->lastmove_clock = clock();
+	slake->lastmove_clock = get_time();
 	
 	return slake;
 

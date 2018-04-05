@@ -1,13 +1,14 @@
 #include <termbox.h>
 #include <stdio.h>
+#include <sys/time.h>
 
 //
 // LOGIC DECLARATIONS
 //
 
 //map const
-#define MAP_SIZE_X  1000
-#define MAP_SIZE_Y  1000
+#define MAP_SIZE_X  100
+#define MAP_SIZE_Y  100
 
 //
 #define AMOUNT_SMALL_FOOD 400
@@ -148,6 +149,7 @@ void slakeio_log(char *str);
 // a fuction that checks weather a position is inside a givin rect 
 // returns true if it's inside
 int in_rect(struct slake_map_t *rect, struct slake_position_t *pos);
+double get_time(void);
 
 
 // logs

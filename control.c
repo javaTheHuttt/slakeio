@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
+#include <sys/time.h>
 
 //init 300 random food-coordinates
 void init_food(void)
@@ -124,4 +125,10 @@ int in_rect(struct slake_map_t *rect, struct slake_position_t *pos) {
 			return 1;
 		}
 	return 0;
+}
+
+double get_time(void) {
+	struct timeval time;
+	gettimeofday(&time, NULL);
+	return (double)time.tv_sec + (double)time.tv_usec / 1000000;
 }
