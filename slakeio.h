@@ -40,6 +40,9 @@ struct slake_position_t {
 	int y;
 };
 
+//loop
+int loop;
+
 //food
 
 
@@ -75,13 +78,26 @@ void slake_move(struct slake_t *slake);
 
 void game_init(void);
 
-//gamestatus
+//*****GAMESTATUS*****
 enum gamestatus {
-	startmenu,
-	playing,
-	pausemenu,
-	win,
-	lost};
+	startmenu_status,
+	playing_status,
+	win_status,
+	lost_status};
+
+enum gamestatus status;
+
+void startmenu(void);
+void win(void);
+void lost(void);
+//**help functions
+void put_menu_header(char *header,uint16_t style, int x, int y);
+void put_menu_option(char *option,uint16_t style, int x, int y);
+void put_background(int start_x, int start_y, int end_x, int end_y);
+
+
+
+
 
 // global array that holds all slakes
 struct slake_array_t {

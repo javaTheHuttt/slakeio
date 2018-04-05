@@ -16,7 +16,7 @@ int main(int argc, char *argv []) {
 	//main loop
 	write_log("Call game_init\n");
 	game_init();
-	gamestatus = startmenu;
+	status = startmenu_status;
 	// -------- Test Slake --------
 	write_log( "Init test slake\n");
 	all_slakes = malloc(sizeof(struct slake_array_t));
@@ -25,34 +25,35 @@ int main(int argc, char *argv []) {
 	my_slake = slake_init(&all_slakes->array[0], (double)(MAP_SIZE_X / 2), (double)(MAP_SIZE_Y / 2), 5, up, 0.1);
 	
     	write_log("Start main loop\n");
-	int loop = 1;
+	loop = 1;
 	
 	while(loop) {
-		if(gamestatus == startmenu) { startmenu(); }
-		else if(gamestatus == win) { win(); }
-		else if(gamestatus == lost) { lost; }
-
-
-		struct tb_event e;
-		tb_peek_event(&e, 100);
-	
-		switch (e.type) {
-		case TB_EVENT_KEY:
-			if (e.key == TB_KEY_ESC) {
-                		write_log("ESC key detected\n");
-				loop = 0;
+		if(status == startmenu_status) { startmenu(); }
+		else if(status == win_status) { win(); }
+		else if(status == lost_status) { lost(); }
+		else if(status == playing_status)
+			{
+			struct tb_event e;
+			tb_peek_event(&e, 100);
+		
+			switch (e.type) {
+			case TB_EVENT_KEY:
+				if (e.key == TB_KEY_ESC) {
+                			write_log("ESC key detected\n");
+					loop = 0;
+				}
+				else key_control(e.key);
 			}
-			else key_control(e.key);
+			// iterate over all slakes
+			for (int i = 0; i < all_slakes->length; i++) {
+				// move slake 
+				slake_move(all_slakes->array);
+				//checks slake ate and replaces 
+				int ate_food = check_food(my_slake);
+				replace_food(ate_food);
+			} 
+			draw();
 		}
-		// iterate over all slakes
-		for (int i = 0; i < all_slakes->length; i++) {
-			// move slake 
-			slake_move(all_slakes->array);
-			//checks slake ate and replaces 
-			int ate_food = check_food(my_slake);
-			replace_food(ate_food);
-		} 
-		draw();
 	}
 	
 	write_log("Call tb_shutdown\n");

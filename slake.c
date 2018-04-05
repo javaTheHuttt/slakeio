@@ -29,7 +29,7 @@ void slake_move(struct slake_t *slake)
 	
 	// check if head will be outside map 
 	if (!in_rect(map, &slake->cells[0])) {
-		// TODO: Kill slake :(
+		status = lost_status;
 		return;
 	}
 
