@@ -45,7 +45,6 @@ int main(int argc, char *argv []) {
 			//checks slake ate and replaces 
 			int ate_food = check_food(my_slake);
 			replace_food(ate_food);
-			// TODO: Check for food
 		} 
 		draw();
 	}

@@ -27,8 +27,9 @@ int check_food(struct slake_t *slake)
 	{
 		if(slake->cells[0].x == food[i].x && slake->cells[0].y == food[i].y)
 		{
+			slake->length++;
 			return i; //slake ate food 
-			//TODO slake grows
+		
 			break;
 		}
 	}
