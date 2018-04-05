@@ -24,11 +24,18 @@ static const struct tb_cell enemy_player =
 };
 
 
-static const struct tb_cell tb_food =
+static const struct tb_cell tb_big_food =
 {
 	.ch = '#',
 	.fg = TB_BOLD,
 	.bg = TB_BLUE,
+};
+
+static const struct tb_cell tb_small_food =
+{
+	.ch = '.',
+	.fg = TB_DEFAULT,
+	.bg = TB_DEFAULT,
 };
 
 static const struct tb_cell map_border =
@@ -121,18 +128,18 @@ void draw(void) {
 	// ####################### DRAW FOOD ########################
 	
 	
-	for (int i = 0;i<300;i++) {
+	for (int i = 0;i<AMOUNT_BIG_FOOD;i++) {
 		if(in_rect(screen, &big_food[i])) {
 			x = big_food[i].x - screen->upper_left->x;
 			y = big_food[i].y - screen->upper_left->y;
-			tb_put_cell(x, y, &tb_food);
+			tb_put_cell(x, y, &tb_big_food);
 		}
 	};
-	for (int j = 0;j<400;j++) {
+	for (int j = 0;j<AMOUNT_SMALL_FOOD;j++) {
 		if(in_rect(screen, &small_food[j])) {
 			x = small_food[j].x - screen->upper_left->x;
 			y = small_food[j].y - screen->upper_left->y;
-			tb_put_cell(x, y, &tb_food);
+			tb_put_cell(x, y, &tb_small_food);
 		}
 	};
 

@@ -58,10 +58,15 @@ int check_food(struct slake_t *slake)
 //if slake ate food this functions creats new food-coordinate
 void replace_food(int place)
 {
-	if(place>=0)
+	if(/*place>=0 &&*/ my_slake->length-my_slake->old_length>1)
 	{
 		big_food[place].x = rand() % 1000;
 		big_food[place].y = rand() % 1000;
+	}
+	else if(place>=0)
+	{
+		small_food[place].x = rand() % 1000;
+		small_food[place].y = rand() % 1000;
 	}
 }
 
