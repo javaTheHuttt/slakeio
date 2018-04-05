@@ -57,4 +57,9 @@ int main(int argc, char *argv []) {
 void game_uninit(void) {
 	free(all_slakes->array);
 	free(all_slakes);
+	free(pos1);
+	free(pos2);
+	free(map);
+	free(big_food);
+	free(small_food);
 }

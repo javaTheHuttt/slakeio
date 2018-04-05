@@ -40,7 +40,7 @@ static const struct tb_cell tb_small_food =
 
 static const struct tb_cell map_border =
 {
-	.ch = '#',
+	.ch = ' ',
 	.fg = TB_BOLD,
 	.bg = TB_WHITE,
 };

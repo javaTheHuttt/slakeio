@@ -74,10 +74,10 @@ void replace_food(int place)
 
 void game_init(void) {
 	//initialize map
-	struct slake_position_t *pos1 = malloc(sizeof(struct slake_position_t)); 
+	pos1 = malloc(sizeof(struct slake_position_t)); 
 	pos1->x = 0;
 	pos1->y = 0;
-	struct slake_position_t *pos2 = malloc(sizeof(struct slake_position_t)); 
+	pos2 = malloc(sizeof(struct slake_position_t)); 
 
 	//size of the map
 	pos2->x = MAP_SIZE_X;
