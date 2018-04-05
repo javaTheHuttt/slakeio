@@ -75,6 +75,13 @@ void slake_move(struct slake_t *slake);
 
 void game_init(void);
 
+//gamestatus
+enum gamestatus {
+	startmenu,
+	playing,
+	pausemenu,
+	win,
+	lost};
 
 // global array that holds all slakes
 struct slake_array_t {

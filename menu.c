@@ -6,10 +6,8 @@
 enum gamestatus {
 	startmenu,
 	playing,
-	pausemenu,
 	win,
 	lost};
-
 
 struct tb_cell menu = {
 	.ch = ' ',
@@ -56,29 +54,27 @@ void put_background(int start_x, int start_y,int end_x,int end_y)
 	}
 }
 
-
-int main(void)
+//startmenu
+int startmenu(void)
 {
-	tb_init();
+	//stuff to calculate the center & enter the strings
+	int width = tb_width();
+	int height = tb_height();	
+	char *welcome = "  Willkommen in SlakeWorld!  ";
+	char *start = " press ENTER to play ";
+	int welcome_lenght = strlen(welcome);
+	int start_lenght = strlen(start);
+	int welcome_height = height/2;
+	int welcome_begin = width/2 -(welcome_lenght/2);
+	int start_begin = (welcome_lenght/2) - (start_lenght/2);
+	put_background(0,0,width,height);
 
+	put_menu_header(welcome, TB_BLUE ,welcome_begin, welcome_height);
+	put_menu_option(start, TB_BLUE, welcome_begin+start_begin,welcome_height+8
+);
 
 	while(1) {
 
-		//stuff to calculate the center & enter the strings
-		int width = tb_width();
-		int height = tb_height();	
-		char *welcome = "  Willkommen in SlakeWorld!  ";
-		char *start = " Start ";
-		int welcome_lenght = strlen(welcome);
-		int start_lenght = strlen(start);
-		int welcome_height = height/2;
-		int welcome_begin = width/2 -(welcome_lenght/2);
-		int start_begin = (welcome_lenght/2) - (start_lenght/2);
-		put_background(0,0,width,height);
-
-		put_menu_header(welcome, TB_BLUE ,welcome_begin, welcome_height);
-		put_menu_option(start, TB_BLUE, welcome_begin+start_begin,welcome_height+5
-);
 
 		tb_present();
 
@@ -95,34 +91,82 @@ int main(void)
 			case TB_KEY_ENTER:
 				put_menu_option(start, TB_GREEN, welcome_begin+start_begin,welcome_height+5);
 				tb_present();
-				break;
-			//	goto game;
+				while(1)
+				{
+					struct tb_event waiting_start;
+					tb_peek_event(&waiting_start, 100);
+					switch(waiting_start.key){
+						case TB_KEY_ESC:
+							goto exit;
+						case TB_KEY_ENTER:
+							break;
+					}
+				}
+				goto game;
 			
 			}
 		
 	
 	}		
-/*game:
-			tb_peek_event(&begin, 100);
-		int width = tb_width();
-		int height = tb_height();	
-		char *welcome = "Willkommen in SlakeWorld!";
-		char *start = "Start";
-		int welcome_lenght = strlen(welcome);
-		int start_lenght = strlen(start);
-		int welcome_height = height/2;
-		int welcome_begin = width/2 -(welcome_lenght/2);
-		int start_begin = (welcome_lenght/2) - (start_lenght/2);
-	switch(begin.key){
-				case TB_KEY_ESC:
-					goto exit;
-				case TB_KEY_ENTER:
-					put_menu_option(start, TB_RED, welcome_begin+start_begin,welcome_height+5);
-					tb_present();
-
-				}
-*/
 exit:
 	tb_shutdown();
-return(0);
+game:
+	return(0);
 }
+
+//win
+void win(void) 
+{
+	char *win = " YOU WON ";
+	char *score = "Score: %s" ,itoa(my_slake->length);
+	char *instruction2 = " press Enter to play "
+	char *instruction3 = " press ESC to exit "
+	put_background(0,0,width,height);
+	put_menu_header(win, TB_GREEN,welcome_begin, welcome_height);
+	put_menu_option(score, TB_GREEN, welcome_begin, welcome_height+8);
+	put_menu_option(instruction2, TB_BLUE,welcome_begin, welcome_height+11);
+	put_menu_option(instruction3, TB_BLUE,welcome_begin, welcome_height+13);	
+	while(1)
+	{
+		struct tb_event input;
+		tb_peek_event(&input, 100);
+		switch(input.key) {
+			case TB_KEY_ESC:
+				goto exit;
+			case TB_KEY_ENTER:
+				goto game;
+		}
+
+	}
+exit:
+	tb_shutdown();
+game:
+	return(0);
+}
+
+//lost
+void lost(void)
+{
+	char *lost = " YOU LOST ";
+	char *score = "YOUR SCORE %s" ,itoa(my_slake->length);
+	put_background(0,0,width,height);
+	put_menu_option(score, TB_RED, welcome_begin, welcome_height);
+
+	while(1)
+	{
+		struct tb_event input;
+		tb_peek_event(&input, 100);
+		switch(input.key) {
+			case TB_KEY_ESC:
+				goto exit;
+			case TB_KEY_ENTER:
+				goto game;
+		}
+
+	}
+exit:
+	tb_shutdown();
+game:
+	return(0);
+}
+

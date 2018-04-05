@@ -16,6 +16,7 @@ int main(int argc, char *argv []) {
 	//main loop
 	write_log("Call game_init\n");
 	game_init();
+	gamestatus = startmenu;
 	// -------- Test Slake --------
 	write_log( "Init test slake\n");
 	all_slakes = malloc(sizeof(struct slake_array_t));
@@ -27,6 +28,11 @@ int main(int argc, char *argv []) {
 	int loop = 1;
 	
 	while(loop) {
+		if(gamestatus == startmenu) { startmenu(); }
+		else if(gamestatus == win) { win(); }
+		else if(gamestatus == lost) { lost; }
+
+
 		struct tb_event e;
 		tb_peek_event(&e, 100);
 	
