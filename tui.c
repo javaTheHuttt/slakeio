@@ -120,19 +120,19 @@ void draw(void) {
 	};
 
 	// ################# DRAW MAP BORDERS #####################
-	if ((! in_rect(map, screen->upper_left))) {
-		for(int x = 0;x <= abs(screen->upper_left->x - map->upper_left->x); x++) {
-			for(int y = 0; y <= abs(screen->upper_left->y - map->upper_left->y); y++) {
-				tb_put_cell(x, y, &map_border);
+	if (! in_rect(map, screen->upper_left) || !in_rect(map, screen->bottom_right)) {
+		for(x = 0; x<=tbw;x++) {
+			for (y=0; y<=tbh; y++) {
+				struct slake_position_t pos = {
+					.x= x + screen->upper_left->x,
+					.y= y + screen->upper_left->y 
+				};
+				if(!in_rect(map, &pos)) {
+					tb_put_cell(x, y, &map_border);
+				}
 			}
 		}
-	}
-	else if ((!in_rect(map, screen->bottom_right))) {
-		for(int x = abs(screen->bottom_right->x - map->bottom_right->x); x >= 0; x--) {
-			for(int y = abs(screen->bottom_right->y - map->bottom_right->y); y >= 0; y--) {
-				tb_put_cell(x, y, &map_border);
-			}
-		}
+	
 	}
 	// ################ SHOW COORDINATES ######################
 	show_coordinates(my_slake->cells[0].x, my_slake->cells[0].y);
