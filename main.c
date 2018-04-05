@@ -47,8 +47,8 @@ int main(int argc, char *argv []) {
 	write_log("Call tb_shutdown\n");
 	tb_shutdown();
 
-	// end log and print 
-	end_log(1);
+	// end log and do not print 
+	end_log(0);
 	
 
 	return 0;
