@@ -9,6 +9,9 @@
 #define MAP_SIZE_X  1000
 #define MAP_SIZE_Y  1000
 
+//
+#define AMOUNT_SMALL_FOOD 400
+#define AMOUNT_BIG_FOOD   300
 
 enum slake_mode_t {left, up, right, down};
 
@@ -38,6 +41,8 @@ struct slake_position_t {
 };
 
 //food
+
+
 //
 //-functions
 //--- init random food-coordinates and puts them in array food
@@ -48,6 +53,9 @@ int check_food(struct slake_t *slake);
 void replace_food(int index_used_food);
 //-food array
 struct slake_position_t *big_food;
+struct slake_position_t *small_food;
+
+
 
 // slake functions
 
