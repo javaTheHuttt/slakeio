@@ -5,9 +5,6 @@
 
 void slake_move(struct slake_t *slake)
 {
-	// points to first position of slake head
-	//struct slake_position_t *head = slake->cells;
-	
 	// current slake mode
 	enum slake_mode_t mode = slake->mode;
 
@@ -19,22 +16,25 @@ void slake_move(struct slake_t *slake)
 	// update clock after move
 	slake->lastmove_clock = current_time;
 	
-	// storage management
+	// storage management if length changed
 	if (slake->old_length != slake->length) {
 		slake->cells = realloc(slake->cells, sizeof(struct slake_position_t) * slake->length);
 		slake->old_length = slake->length;
 	}
-
+	// store old head locations to calculate diff
 	double old_head_x = slake->head_x;
 	double old_head_y = slake->head_y;
 
+	// cells moved
 	int x_diff = 0;
 	int y_diff = 0;
 	
-	// check if head will be outside map 
+	// check if head is outside map 
 	if (!in_rect(map, &slake->cells[0])) {
 		status = lost_status;
+		return;
 	}
+
 	// check if inside other snake
 //	for(int s = 0; s < all_slakes->length; s++) {
 //		// go with c through all cells of the slake
@@ -52,10 +52,9 @@ void slake_move(struct slake_t *slake)
 //	}
 
 
-	for(int i = 2; i<my_slake->length; i++)
-	{
-		if(my_slake->cells[0].x == my_slake->cells[i].x && my_slake->cells[0].y == my_slake->cells[i].y)
-		{
+	for(int i = 2; i < my_slake->length; i++) {
+		
+		if(my_slake->cells[0].x == my_slake->cells[i].x && my_slake->cells[0].y == my_slake->cells[i].y) {
 			status = lost_status;
 			write_log("Slake got killed at x=%d, y=%d\n", my_slake->cells[0].x, my_slake->cells[0].y);
 			return;
@@ -63,7 +62,7 @@ void slake_move(struct slake_t *slake)
 	}
 
 
-	// new head positions
+	// new head positions and cells to move in direction
 	if(mode == left) {
 		slake->head_x -= delta_distance;
 		x_diff = -1;
@@ -81,7 +80,7 @@ void slake_move(struct slake_t *slake)
 		y_diff = 1;
 	}
 	
-
+	// rounded head distance to detect lags 
 	int head_delta_distance_x = abs((int) (round(old_head_x)-round(slake->head_x)));
 	int head_delta_distance_y = abs((int) (round(old_head_y)-round(slake->head_y)));
 	
