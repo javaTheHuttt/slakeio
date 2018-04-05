@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "slakeio.h"
 
+//helperfunctions
 void put_menu_header(char *header, uint16_t style, int x, int y)
 {
 	int header_str_length = strlen(header);	
@@ -44,7 +45,8 @@ void put_background(int start_x, int start_y,int end_x,int end_y)
 	}
 }
 
-//startmenu
+
+//****STARTMENU****
 void startmenu(void)
 {
 	//stuff to calculate the center & enter the strings
@@ -52,24 +54,19 @@ void startmenu(void)
 	int height = tb_height();	
 	char *welcome = "  Willkommen in SlakeWorld!  ";
 	char *start = " press ENTER to play ";
+
 	int welcome_lenght = strlen(welcome);
 	int start_lenght = strlen(start);
 	int welcome_height = height/2;
 	int welcome_begin = width/2 -(welcome_lenght/2);
 	int start_begin = (welcome_lenght/2) - (start_lenght/2);
+
 	put_background(0,0,width,height);
-
-
-
 	put_menu_header(welcome, TB_BLUE ,welcome_begin, welcome_height);
 	put_menu_option(start, TB_BLUE, welcome_begin+start_begin,welcome_height+8
 );
-
+	tb_present();
 	while(1) {
-
-
-		tb_present();
-
 		//Input
 		struct tb_event input;
 
@@ -98,11 +95,9 @@ void startmenu(void)
 	}		
 }
 
-//win
+//****WIN****
 void win(void) 
 {
-
-
 	char *win = " YOU WON ";
 	char *score = malloc(80 * sizeof(char));
 	sprintf(score, "Your score: %d", my_slake->length);
@@ -117,7 +112,6 @@ void win(void)
 	int win_begin = width/2 -(win_lenght/2);
 	int score_begin = (score_lenght/2) - (win_lenght/2);
 	
-
 	put_background(0,0,width,height);
 	put_menu_header(win, TB_GREEN,win_begin, win_height);
 	put_menu_option(score, TB_GREEN, score_begin, win_height+8);
@@ -141,17 +135,14 @@ void win(void)
 	}
 }
 
-//lost
+//****LOST****
 void lost(void)
 {
-
 	char *lost = " YOU LOST ";
 	char *score = malloc(80 * sizeof(char));
 	sprintf(score, "Your score: %d", my_slake->length);
 	char *instruction2 = " press Enter to play ";
 	char *instruction3 = " press ESC to exit ";
-
-
 
 	int width = tb_width();
 	int height = tb_height();	
@@ -161,7 +152,6 @@ void lost(void)
 	int lost_begin = width/2 -(lost_lenght/2);
 	int score_begin = (score_lenght/2) - (lost_lenght/2);
 	
-
 	put_background(0,0,width,height);
 	put_menu_option(lost, TB_RED, lost_begin, lost_height);
 	put_menu_option(score, TB_GREEN, score_begin, lost_height+8);
