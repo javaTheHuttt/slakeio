@@ -6,8 +6,8 @@
 //
 
 //map const
-#define MAP_SIZE_X  1000
-#define MAP_SIZE_Y  1000
+#define MAP_SIZE_X  100
+#define MAP_SIZE_Y  100
 
 //
 #define AMOUNT_SMALL_FOOD 400

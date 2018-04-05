@@ -29,8 +29,19 @@ void slake_move(struct slake_t *slake)
 	
 	// check if head will be outside map 
 	if (!in_rect(map, &slake->cells[0])) {
-		// TODO: Kill slake :(
+		gamestatus = lost;
 		return;
+	}
+	// check if inside other snake
+	for(int s = 0; s < all_slakes->length; s++) {
+		// go with c through all cells of the slake
+		for (int c = 0; c < (all_slakes->array[s]).length; c++) {
+			if (slake->cells[0].x == all_slakes->array[s]).cells[c].x &&
+				slake->cells[0].x == all_slakes->array[s]).cells[c].x) {
+				gamestatus = lost;
+				return;
+			}
+		}
 	}
 
 	// new head positions
