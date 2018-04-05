@@ -113,8 +113,7 @@ void draw(void) {
 	
 		}
 	}
-	// ################ SHOW COORDINATES ######################
-	show_coordinates(my_slake->cells[0].x, my_slake->cells[0].y);
+	
 
 
 
@@ -151,6 +150,8 @@ void draw(void) {
 			}
 		}
 	}
+	// ################ SHOW COORDINATES ######################
+	show_coordinates(my_slake->cells[0].x, my_slake->cells[0].y);
 	
 	tb_present();	
 
