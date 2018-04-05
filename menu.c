@@ -52,7 +52,7 @@ void startmenu(void)
 	//stuff to calculate the center & enter the strings
 	int width = tb_width();
 	int height = tb_height();	
-	char *welcome = "  Willkommen in SlakeWorld!  ";
+	char *welcome = "   _SlakeIO_   ";
 	char *start = " press ENTER to play ";
 
 	int welcome_lenght = strlen(welcome);
