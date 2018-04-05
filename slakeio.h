@@ -19,6 +19,7 @@ struct slake_t {
 	enum slake_mode_t mode;
 	// score or length of slake
 	int length;
+	int old_length;
 
 	//lastmove_time
 	double lastmove_clock;
