@@ -108,15 +108,20 @@ void win(void)
 	int height = tb_height();	
 	int win_lenght = strlen(win);
 	int score_lenght = strlen(score);
+	int ins2_length = strlen(instruction2);
+	int ins3_length = strlen(instruction3);	
 	int win_height = height/2;
 	int win_begin = width/2 -(win_lenght/2);
-	int score_begin = (score_lenght/2) - (win_lenght/2);
+	int score_begin = width/2 - (score_lenght/2);
+	int ins2_begin = width/2 - (ins2_length/2);
+	int ins3_begin = width/2 - (ins3_length/2);
 	
+
 	put_background(0,0,width,height);
 	put_menu_header(win, TB_GREEN,win_begin, win_height);
 	put_menu_option(score, TB_GREEN, score_begin, win_height+8);
-	put_menu_option(instruction2, TB_BLUE,win_begin, win_height+11);
-	put_menu_option(instruction3, TB_BLUE,win_begin, win_height+13);
+	put_menu_option(instruction2, TB_BLUE,ins2_begin, win_height+11);
+	put_menu_option(instruction3, TB_BLUE,ins3_begin, win_height+13);
 	tb_present();	
 	while(1)
 	{
@@ -148,15 +153,19 @@ void lost(void)
 	int height = tb_height();	
 	int lost_lenght = strlen(lost);
 	int score_lenght = strlen(score);
+	int ins2_length = strlen(instruction2);
+	int ins3_length = strlen(instruction3);
 	int lost_height = height/2;
 	int lost_begin = width/2 -(lost_lenght/2);
-	int score_begin = (score_lenght/2) - (lost_lenght/2);
+	int score_begin = width/2 - (score_lenght/2);
+	int ins2_begin = width/2 - (ins2_length/2);
+	int ins3_begin = width/2 - (ins3_length/2);
 	
 	put_background(0,0,width,height);
-	put_menu_option(lost, TB_RED, lost_begin, lost_height);
+	put_menu_header(lost, TB_RED, lost_begin, lost_height);
 	put_menu_option(score, TB_GREEN, score_begin, lost_height+8);
-	put_menu_option(instruction2, TB_BLUE,lost_begin, lost_height+11);
-	put_menu_option(instruction3, TB_BLUE,lost_begin, lost_height+13);	
+	put_menu_option(instruction2, TB_BLUE,ins2_begin, lost_height+11);
+	put_menu_option(instruction3, TB_BLUE,ins3_begin, lost_height+13);	
 	tb_present();	
 
 	while(1)
