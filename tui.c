@@ -123,15 +123,15 @@ void draw(void) {
 	
 	for (int i = 0;i<300;i++) {
 		if(in_rect(screen, &big_food[i])) {
-			x = food[i].x - screen->upper_left->x;
-			y = food[i].y - screen->upper_left->y;
+			x = big_food[i].x - screen->upper_left->x;
+			y = big_food[i].y - screen->upper_left->y;
 			tb_put_cell(x, y, &tb_food);
 		}
 	};
 	for (int j = 0;j<400;j++) {
 		if(in_rect(screen, &small_food[j])) {
-			x = food[i].x - screen->upper_left->x;
-			y = food[i].y - screen->upper_left->y;
+			x = small_food[j].x - screen->upper_left->x;
+			y = small_food[j].y - screen->upper_left->y;
 			tb_put_cell(x, y, &tb_food);
 		}
 	};
