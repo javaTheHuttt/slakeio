@@ -30,6 +30,7 @@ void init_food(void)
 //checks if slake ate food
 int check_food(struct slake_t *slake)
 {
+	if(slake->length>=500) { status = win_status; }
 	//checks big_food
 	for(int i = 0; i< AMOUNT_BIG_FOOD; i++)
 	{

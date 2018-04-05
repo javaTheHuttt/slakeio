@@ -18,6 +18,7 @@ int main(int argc, char *argv []) {
 	while(loop) {
 		if(status == win_status) { win(); }
 		else if(status == lost_status) { lost(); }
+		else if(status == win_status) { win(); }
 		else if(status == playing_status)
 			{
 			struct tb_event e;
